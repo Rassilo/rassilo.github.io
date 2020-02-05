@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <canvas id="canvas" width=800 height=400></canvas>
+    <br>Original aspect:<br>
+    <Button onclick="togglePlay()">PLay/Pause</Button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.2/fabric.min.js"></script>
+
+    <script>
+
+        var canvas = new fabric.Canvas('canvas', {
+            backgroundColor: 'lightgrey',
+            width: 900,
+            height: 600
+        });
+        var autoPlay = false;
+
+        function scaleImageToSlot(image, slot) {
+            const alignCenter = true;
+
+            // Find smallest ratio of slot:width / image:width and slot:height / image: height
+            let ratio = Math.min(slot.width / image.width, slot.height / image.height);
+            console.log(`ratio width ${slot.width / image.width}, height ${slot.height / image.height}`);
+            console.log('=> ratio', ratio);
+
+            if (ratio <= 1) {
+                image.scaleToWidth(slot.width);
+                // console.log(image);
+                let newHeight = image.height * image.scaleY;
+
+                // console.log(`${newHeight} < ${slotHeight}?`)
+
+                if (newHeight < slot.height) {
+                    image.scaleToHeight(slot.height);
+                }
+            }
+            else {
+                image.scaleToHeight(slot.height);
+                let newWidth = image.width * image.scaleX;
+
+                if (newWidth < slot.width) {
+                    image.scaleToWidth(slot.width);
+                }
+            }
+
+            var shiftLeft = (slot.width - (image.width * image.scaleX)) / 2;
+            var shiftTop = (slot.height - (image.height * image.scaleY)) / 2;
+            console.log(`shift ${shiftLeft}x${shiftTop}`)
+
+            if (alignCenter) {
+                image.set({ left: slot.left + shiftLeft });
+                image.set({ top: slot.top + shiftTop });
+            }
+            else {
+                if (image.left < slot.left) {
+                    // align image to center.
+                    image.setLeft(slot.left);
+                }
+                if (image.top < slot.top) {
+                    image.setTop(slot.top);
+                }
+            }
+
+        }
+
+        function clipBySlot(ctx, image, slot) {
+            var scaleXTo1 = (1 / image.scaleX);
+            var scaleYTo1 = (1 / image.scaleY);
+
+            // Save context of the canvas so it can be restored after the clipping
+            ctx.save();
+
+            ctx.translate(0, 0);
+            ctx.rotate(degToRad(image.angle * -1));
+            ctx.scale(scaleXTo1, scaleYTo1);
+
+            ctx.beginPath();
+
+            const boundingRect = image.getBoundingRect();
+            // console.log(`[left] ${image.left} - (${boundingRect.width} / 2)`);
+
+            ctx.rect(
+                slot.left - image.left - Math.floor(boundingRect.width / 2),
+                slot.top - image.top - Math.floor(boundingRect.height / 2),
+                slot.width,
+                slot.height
+            );
+            ctx.stroke()
+            ctx.closePath();
+
+            // Restore the original context.
+            ctx.restore();
+        }
+
+        function degToRad(degrees) {
+            return degrees * (Math.PI / 180);
+        }
+
+        function animate(object, slot, speed) {
+            return new Promise(resolve => {
+                const rotate = () => {
+                    if (object.left > slot.width + slot.left) {
+                        resolve(true);
+                    }
+                    else {
+                        if (autoPlay) {
+                            object.left += speed;
+                        }
+                        canvas.renderAll();
+                        fabric.util.requestAnimFrame(rotate);
+                    }
+                }
+                rotate();
+            })
+        };
+
+
+
+        const main = async () => {
+
+            const images = [
+                'http://media.gettyimages.com/photos/abstract-network-background-picture-id836272842?s=612x612',
+                'http://www.socwall.com/images/wallpapers/74678-1920x1080.jpg',
+                'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg'
+            ]
+
+            const speed = 5;
+
+            var slot1 = new fabric.Rect({
+                originX: 'left',
+                originY: 'top',
+                left: 10,
+                top: 10,
+                width: 600,
+                height: 400,
+                fill: 'transparent',
+                stroke: 'white',
+                strokeWidth: 0,
+                selectable: false
+            });
+            canvas.renderAll();
+
+            const image1 = await new Promise(resolve => {
+                fabric.Image.fromURL(images[0], async (image) => {
+                    image.scale(0.5);
+                    image.set({
+                        left: 0,
+                        top: 0,
+                        hoverCursor: 'default',
+                        clipTo: function (ctx) {
+                            return clipBySlot(ctx, image, slot1);
+                        }
+                    })
+                    scaleImageToSlot(image, slot1);
+                    canvas.add(image);
+                    canvas.renderAll();
+                    resolve(image);
+                })
+            });
+
+            const image2 = await new Promise(resolve => {
+                fabric.Image.fromURL(images[1], async (image) => {
+                    image.scale(0.5);
+                    image.set({
+                        left: 0,
+                        top: 0,
+                        hoverCursor: 'default',
+                        clipTo: function (ctx) {
+                            return clipBySlot(ctx, image, slot1);
+                        }
+                    })
+                    scaleImageToSlot(image, slot1);
+                    canvas.add(image);
+                    canvas.renderAll();
+                    resolve(image);
+                })
+            });
+
+            const image3 = await new Promise(resolve => {
+                fabric.Image.fromURL(images[2], async (image) => {
+                    image.scale(0.5);
+                    image.set({
+                        left: 0,
+                        top: 0,
+                        hoverCursor: 'default',
+                        clipTo: function (ctx) {
+                            return clipBySlot(ctx, image, slot1);
+                        }
+                    })
+                    scaleImageToSlot(image, slot1);
+                    canvas.add(image);
+                    canvas.renderAll();
+                    resolve(image);
+                })
+            });
+
+            const slides = [image1, image2, image3];
+            let margin = 0;
+            let first = false;
+
+            while (true) {
+                margin = 0;
+                const promises = slides.map(async (slide, index) => {
+                    if (index != 0) {
+                        margin += slot1.left - (slide.width * slide.scaleX);
+                        slide.left = margin;
+                    } else {
+                        slide.left = slot1.left;
+                    }
+                    if (index == 0) {
+                        if (first) {
+                        } else {
+                            await animate(slide, slot1, speed);
+                        }
+                        first = true;
+
+                    } else {
+                        await animate(slide, slot1, speed, margin);
+                    }
+                    if (index == slides.length - 2) {
+                        slides[0].left = slot1.left - (slide.width * slide.scaleX);
+                        animate(slides[0], slot1, speed);
+                    }
+
+                });
+                await Promise.all(promises);
+            }
+
+        }
+
+        const togglePlay = () => {
+            autoPlay = !autoPlay;
+            console.log({ autoPlay });
+        }
+
+        main();
+
+
+
+
+    </script>
+</body>
+
+</html>
