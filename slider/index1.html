@@ -18,8 +18,8 @@
 
     <img src="" alt="" id="ten">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.2/fabric.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.2.2/jszip.min.js"></script>
     <script src="test.js"></script>
-
     <script>
         var canvas = new fabric.Canvas('canvas', {
             backgroundColor: 'lightgrey',
@@ -27,16 +27,11 @@
             height: 1080
         });
 
-        console.log({ canvasElement });
 
         function scaleImageToSlot(image, slot) {
             const alignCenter = true;
-
             // Find smallest ratio of slot:width / image:width and slot:height / image: height
             let ratio = Math.min(slot.width / image.width, slot.height / image.height);
-            console.log(`ratio width ${slot.width / image.width}, height ${slot.height / image.height}`);
-            console.log('=> ratio', ratio);
-
             if (ratio <= 1) {
                 image.scaleToWidth(slot.width);
                 // console.log(image);
@@ -59,7 +54,6 @@
 
             var shiftLeft = (slot.width - (image.width * image.scaleX)) / 2;
             var shiftTop = (slot.height - (image.height * image.scaleY)) / 2;
-            console.log(`shift ${shiftLeft}x${shiftTop}`)
 
             if (alignCenter) {
                 image.set({ left: slot.left + shiftLeft });
@@ -110,83 +104,129 @@
             return degrees * (Math.PI / 180);
         }
 
-        function isChanged() {
-            if (!arr.length) {
-                return false;
-            }
-            arr[arr.length - 1] != document.getElementById('canvas').toDataURL();
-        }
-
-        function animate(object, slot, speed) {
-            return new Promise(resolve => {
-                const slide = () => {
-                    if (!slot) {
-                        return;
-                    }
-
-                    if (object.left > slot.width + slot.left) {
-
-                    }
-                    else {
-                        if (autoPlay) {
-                            object.left += speed;
-                            canvas.renderAll();
-                            fabric.util.requestAnimFrame(slide);
-                            totalFrames++;
-                        }
-
-                    }
-                }
-                slide();
-            })
-        };
-
         function animateFrame(object, slot, speed) {
-            if (!slot) {
-                return;
-            }
-            if (object.left > slot.width + slot.left) {
-                return;
-            }
-            else {
-                if (autoPlay) {
+            const slide = () => {
+
+                if (!slot) {
+                    return;
+                }
+                if (object.left > slot.width + slot.left) {
+                    return;
+                }
+                else {
                     object.left += speed;
                     canvas.renderAll();
-                    fabric.util.requestAnimFrame(slide);
                 }
-
             }
+            slide();
         };
 
-        var play = true;
-        var totalFrames = 0;
+        const togglePlay = () => {
+            autoPlay = !autoPlay;
+        }
+
+
+        var slot1 = new fabric.Rect({
+            originX: 'left',
+            originY: 'top',
+            left: 10,
+            top: 10,
+            width: 600,
+            height: 400,
+            fill: 'transparent',
+            stroke: 'white',
+            strokeWidth: 0,
+            selectable: false
+        });
+
+        canvas.renderAll();
+
+        var margin = 0;
+        var first = false;
+
+        var FPS = 30;   /// NTSC
+        var frame = 0;
+        var arr = [];
+        var speed = 5;
         var autoPlay = true;
-        var canvasElement = canvas.getElement();
-        var fps = 30
+        var images = [
+            'http://media.gettyimages.com/photos/abstract-network-background-picture-id836272842?s=612x612',
+            'http://www.socwall.com/images/wallpapers/74678-1920x1080.jpg',
+            'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg'
+        ]
 
-        const main = async () => {
+        var speed = 15;
+        var margin = 0;
+        var timer;
 
-            const images = [
-                'http://media.gettyimages.com/photos/abstract-network-background-picture-id836272842?s=612x612',
-                'http://www.socwall.com/images/wallpapers/74678-1920x1080.jpg',
-                'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg'
-            ]
+        function loop() {
+            frame++;
+            console.log('second ' + frame / FPS);
+            if (frame > 120) {
+                clearInterval(timer);
+                var zip = new JSZip();
 
-            const speed = 5;
+                postBlobs();
 
-            var slot1 = new fabric.Rect({
-                originX: 'left',
-                originY: 'top',
-                left: 10,
-                top: 10,
-                width: 600,
-                height: 400,
-                fill: 'transparent',
-                stroke: 'white',
-                strokeWidth: 0,
-                selectable: false
+                console.log('done');
+
+                return;
+            }
+            const promises = slides.map(async (slide, index) => {
+                animateFrame(slide, slot1, speed);
             });
-            canvas.renderAll();
+            const recordedImage = document.getElementById('canvas').toDataURL();
+            arr = [...arr, recordedImage];
+            //fabric.util.requestAnimFrame(loop);
+        }
+
+        async function postBlobs() {
+            console.log("sending");
+            const url = "https://d0a2b59a.ngrok.io/gen";
+            const temp = [];
+            for (let index = 10; index <= 20; index++) {
+                temp.push(arr[index]);
+            }
+            const blobs = [];
+            const promises = temp.map(async (file) => {
+                const blob = await fileToBlob(file);
+                blobs.push(blob);
+            })
+            await Promise.all(promises);
+            var fd = new FormData();
+            blobs.map((blob, index) => {
+                fd.append(`blob-${index}`, blob, `img-${index}.png`);
+            })
+            fetch(url, {
+                method: "POST",
+                body: fd
+            }).then(res => {
+                console.log("Request complete! response:", res);
+            });
+
+
+        }
+
+        const fileToBlob = async (file) => {
+            return new Promise((resolve) => {
+                fetch(file)
+                    .then(res => res.blob())
+                    .then((blob) => {
+                        resolve(blob);
+                    });
+            });
+        }
+
+        function blobToFile(theBlob, fileName) {
+            //A Blob() is almost a File() - it's just missing the two properties below which we will add
+            theBlob.lastModifiedDate = new Date();
+            theBlob.name = fileName;
+            return theBlob;
+        }
+
+        var slides = [];
+
+        async function main() {
 
             const image1 = await new Promise(resolve => {
                 fabric.Image.fromURL(images[0], async (image) => {
@@ -242,12 +282,8 @@
                 }, { crossOrigin: 'anonymous' })
             });
 
-            const slides = [image1, image2, image3];
-            let margin = 0;
-            let first = false;
+            slides = [image1, image2, image3];
 
-
-            margin = 0;
             const promises = slides.map(async (slide, index) => {
                 if (index != 0) {
                     margin += slot1.left - (slide.width * slide.scaleX);
@@ -255,55 +291,21 @@
                 } else {
                     slide.left = slot1.left;
                 }
-                if (index == 0) {
-                    if (first) {
-                    } else {
-                        await animate(slide, slot1, speed);
-                    }
-                    first = true;
-
-                } else {
-                    await animate(slide, slot1, speed, margin);
-                    // when image is out of the slot
-                }
-                if (index == slides.length - 2) {
-                    slides[0].left = slot1.left - (slide.width * slide.scaleX);
-                    animate(slides[0], slot1, speed);
-                }
             });
-            await Promise.all(promises);
+            //  fabric.util.requestAnimFrame(main);
+            const context = document.getElementById('canvas');
+
+            timer = setInterval(loop, 1000 / FPS);
+            /*const recorder = new CanvasRecorder(context);
+            recorder.start();
+            setTimeout(() => {
+                recorder.stop();
+                recorder.save('busy_motion.webm');
+
+            }, 4000);*/
 
         }
-
-        const togglePlay = () => {
-            autoPlay = !autoPlay;
-        }
-
-        var FPS = 60;   /// NTSC
-        var frame = 0;
-        var rememberMe = setInterval(loop, 1000 / FPS);
-        var arr = [];
-
-        var speed = 20;
-
-        canvas.renderAll();
-
-        function loop() {
-
-            /*FileSaver.saveAs(blob, `frame.txt~);
-            // need to save them instead of display them on img element
-            document.getElementById('ten').src = recordedImage;*/
-        }
-
         main();
-        const context = document.getElementById('canvas');
-        const recorder = new CanvasRecorder(context, 2000000);
-
-        recorder.start();
-        setTimeout(() => {
-            recorder.stop();
-            recorder.save('busy_motion.webm');
-        }, 4000);
 
 
     </script>
