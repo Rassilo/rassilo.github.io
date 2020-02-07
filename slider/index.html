@@ -15,74 +15,27 @@
 
     <canvas id="canvas" width=800 height=400></canvas>
     <br>Recorded Images <Button onclick="togglePlay()">PLay/Pause</Button><br>
-
-    <img src="" alt="" id="ten">
+    <progress id="progress" value="0" max="60" min="0" style="width: 300px"></progress>
+    <br>
+    <progress id="progress" value="0" max="60" min="0" style="width: 300px"></progress>
+    <video id="awesome" width="150" height="150" controls autoplay loop></video>
+    <br>
+    Status: <span id="status">Idle</span>
+    <a style="display:none" id="download" download="clock.webm">Download WebM</a>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.2/fabric.min.js"></script>
-
+    <script src="FileSaver.min.js"></script>
+    <script src="Whammy.js"></script>
     <script>
         var canvas = new fabric.Canvas('canvas', {
             backgroundColor: 'lightgrey',
             width: 900,
             height: 600
         });
-        var autoPlay = false;
+        var autoPlay = true;
         var canvasElement = canvas.getElement();
         var fps = 30
 
-        console.log({ canvasElement });
-
-        var stream = canvasElement.captureStream(30);
-
-        function startRecording() {
-            let options = { mimeType: 'video/webm' };
-            recordedBlobs = [];
-            try {
-                mediaRecorder = new MediaRecorder(stream, options);
-                console.log('start video');
-
-            } catch (e0) {
-                console.log('Unable to create MediaRecorder with options    Object: ', e0);
-                try {
-                    options = { mimeType: 'video/webm,codecs=vp9' };
-                    mediaRecorder = new MediaRecorder(stream, options);
-                } catch (e1) {
-                    console.log('Unable to create MediaRecorder');
-                    try {
-                        options = 'video/vp8'; // Chrome 47
-                        mediaRecorder = new MediaRecorder(stream, options);
-                    } catch (e2) {
-                        alert('MediaRecorder is not supported by this browser');
-                        return;
-                    }
-                }
-            }
-            mediaRecorder.onstop = handleStop;
-            mediaRecorder.ondataavailable = handleDataAvailable;
-            mediaRecorder.start(100); // collect 100ms of data
-        }
-
-
-        function handleStop(event) {
-            superBuffer = new Blob(recordedBlobs, { type: 'video/webm' });
-            video = document.getElementById('canvas_video');
-            video.src = window.URL.createObjectURL(superBuffer);
-            var reader = new FileReader();
-            reader.readAsDataURL(superBuffer);
-            console.log('stop video');
-
-            reader.onloadend = function () {
-                console.log('loaded video');
-                var base64data = reader.result;
-                video.setAttribute('data-base64', base64data)
-            }
-        }
-
-        function handleDataAvailable(event) {
-            if (event.data && event.data.size > 0) {
-                recordedBlobs.push(event.data);
-            }
-        }
-
+        console.log({ canvasElement })
 
 
         function scaleImageToSlot(image, slot) {
@@ -303,20 +256,84 @@
             autoPlay = !autoPlay;
         }
 
-        var FPS = 30;   /// NTSC
-        var rememberMe = setInterval(loop, 1000 / FPS);
 
-        function loop() {
-            console.log('loop');
-            // image per frame
-            const recordedImage = document.getElementById('canvas').toDataURL();
-            // need to save them instead of display them on img element
-            document.getElementById('ten').src = recordedImage;
-        }
+
 
 
 
         main();
+
+
+        // the actual demo code, yaaay
+        var last_time = +new Date;
+        var video = new Whammy.Video(15);
+        var progress = document.getElementById('progress');
+
+        function nextFrame() {
+            progress.value++;
+            var context = document.getElementById('canvas');
+            video.add(context);
+            if (progress.value / progress.max < 1) {
+                requestAnimationFrame(nextFrame);
+                document.getElementById('status').innerHTML = "Drawing Frames";
+            } else {
+                document.getElementById('status').innerHTML = "Compiling Video";
+                requestAnimationFrame(finalizeVideo); // well, should probably use settimeout instead
+            }
+
+        }
+
+        function finalizeVideo() {
+            var start_time = +new Date;
+            var output = video.compile();
+            var end_time = +new Date;
+            var url = webkitURL.createObjectURL(output);
+
+            document.getElementById('awesome').src = url; //toString converts it to a URL via Object URLs, falling back to DataURL
+            document.getElementById('download').style.display = '';
+            document.getElementById('download').href = url;
+            document.getElementById('status').innerHTML = "Compiled Video in " + (end_time - start_time) + "ms, file size: " + Math.ceil(output.size / 1024) + "KB";
+
+        }
+        var FPS = 30;   /// NTSC
+        var frame = 0;
+        var limit = 120;
+        var rememberMe = setInterval(loop, 1000 / FPS);
+
+        function loop() {
+            frame++;
+            var context = document.getElementById('canvas');
+            video.add(context);
+            if (frame > limit) {
+                console.log({ frame });
+                requestAnimationFrame(nextFrame);
+                document.getElementById('status').innerHTML = "Drawing Frames";
+            } else {
+                document.getElementById('status').innerHTML = "Compiling Video";
+                requestAnimationFrame(finalizeVideo); // well, should probably use settimeout instead
+                autoPlay = false;
+            }
+            console.log('loop');
+            // image per frame
+            //const recordedImage =
+            //const fs = new FileSaver()
+            //saveAs(recordedImage, `frame-${frame}.jpg`);
+            // need to save them instead of display them on img element
+            //document.getElementById('ten').src = recordedImage;
+        }
+
+        function finalizeVideo() {
+            var start_time = +new Date;
+            var output = video.compile();
+            var end_time = +new Date;
+            var url = webkitURL.createObjectURL(output);
+
+            document.getElementById('awesome').src = url; //toString converts it to a URL via Object URLs, falling back to DataURL
+            document.getElementById('download').style.display = '';
+            document.getElementById('download').href = url;
+            document.getElementById('status').innerHTML = "Compiled Video in " + (end_time - start_time) + "ms, file size: " + Math.ceil(output.size / 1024) + "KB";
+
+        }
 
 
     </script>
