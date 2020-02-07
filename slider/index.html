@@ -14,18 +14,76 @@
 <body>
 
     <canvas id="canvas" width=800 height=400></canvas>
-    <br>Original aspect:<br>
-    <Button onclick="togglePlay()">PLay/Pause</Button>
+    <br>Recorded Images <Button onclick="togglePlay()">PLay/Pause</Button><br>
+
+    <img src="" alt="" id="ten">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.2/fabric.min.js"></script>
 
     <script>
-
         var canvas = new fabric.Canvas('canvas', {
             backgroundColor: 'lightgrey',
             width: 900,
             height: 600
         });
         var autoPlay = false;
+        var canvasElement = canvas.getElement();
+        var fps = 30
+
+        console.log({ canvasElement });
+
+        var stream = canvasElement.captureStream(30);
+
+        function startRecording() {
+            let options = { mimeType: 'video/webm' };
+            recordedBlobs = [];
+            try {
+                mediaRecorder = new MediaRecorder(stream, options);
+                console.log('start video');
+
+            } catch (e0) {
+                console.log('Unable to create MediaRecorder with options    Object: ', e0);
+                try {
+                    options = { mimeType: 'video/webm,codecs=vp9' };
+                    mediaRecorder = new MediaRecorder(stream, options);
+                } catch (e1) {
+                    console.log('Unable to create MediaRecorder');
+                    try {
+                        options = 'video/vp8'; // Chrome 47
+                        mediaRecorder = new MediaRecorder(stream, options);
+                    } catch (e2) {
+                        alert('MediaRecorder is not supported by this browser');
+                        return;
+                    }
+                }
+            }
+            mediaRecorder.onstop = handleStop;
+            mediaRecorder.ondataavailable = handleDataAvailable;
+            mediaRecorder.start(100); // collect 100ms of data
+        }
+
+
+        function handleStop(event) {
+            superBuffer = new Blob(recordedBlobs, { type: 'video/webm' });
+            video = document.getElementById('canvas_video');
+            video.src = window.URL.createObjectURL(superBuffer);
+            var reader = new FileReader();
+            reader.readAsDataURL(superBuffer);
+            console.log('stop video');
+
+            reader.onloadend = function () {
+                console.log('loaded video');
+                var base64data = reader.result;
+                video.setAttribute('data-base64', base64data)
+            }
+        }
+
+        function handleDataAvailable(event) {
+            if (event.data && event.data.size > 0) {
+                recordedBlobs.push(event.data);
+            }
+        }
+
+
 
         function scaleImageToSlot(image, slot) {
             const alignCenter = true;
@@ -111,6 +169,9 @@
         function animate(object, slot, speed) {
             return new Promise(resolve => {
                 const rotate = () => {
+                    if (!slot) {
+                        return;
+                    }
                     if (object.left > slot.width + slot.left) {
                         resolve(true);
                     }
@@ -165,7 +226,7 @@
                     canvas.add(image);
                     canvas.renderAll();
                     resolve(image);
-                })
+                }, { crossOrigin: 'anonymous' })
             });
 
             const image2 = await new Promise(resolve => {
@@ -183,7 +244,7 @@
                     canvas.add(image);
                     canvas.renderAll();
                     resolve(image);
-                })
+                }, { crossOrigin: 'anonymous' })
             });
 
             const image3 = await new Promise(resolve => {
@@ -201,7 +262,7 @@
                     canvas.add(image);
                     canvas.renderAll();
                     resolve(image);
-                })
+                }, { crossOrigin: 'anonymous' })
             });
 
             const slides = [image1, image2, image3];
@@ -240,10 +301,23 @@
 
         const togglePlay = () => {
             autoPlay = !autoPlay;
-            console.log({ autoPlay });
         }
 
+        var FPS = 30;   /// NTSC
+        var rememberMe = setInterval(loop, 1000 / FPS);
+
+        function loop() {
+            console.log('loop');
+            // image per frame
+            const recordedImage = document.getElementById('canvas').toDataURL();
+            // need to save them instead of display them on img element
+            document.getElementById('ten').src = recordedImage;
+        }
+
+
+
         main();
+
 
     </script>
 </body>
