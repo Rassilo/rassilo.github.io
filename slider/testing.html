@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>WebGL - Rotating Cube</title>
+</head>
+
+<body onload="InitDemo();">
+    <!-- Content Ad for kamaron.me -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4684638037289460" data-ad-slot="9744657970"
+        data-ad-format="auto"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <br />
+    <canvas id="game-surface" width="800" height="600">
+        Your browser does not support HTML5
+    </canvas>
+    <br />
+    <i>Demo is above this text</i>
+    <script src="http://www.kamaron.me/tutorial-live/webgl/02-rotating-cube/gl-matrix.js"></script>
+    <script src="http://www.kamaron.me/tutorial-live/webgl/02-rotating-cube/app.js"></script>
+    <script src="test.js"></script>
+
+    <script>
+        const context = document.getElementById('game-surface');
+        const recorder = new CanvasRecorder(context, 2000000);
+
+        recorder.start();
+        setTimeout(() => {
+            recorder.stop();
+            recorder.save('busy_faaaster_motion.webm');
+        }, 2000);
+    </script>
+</body>
+
+</html>

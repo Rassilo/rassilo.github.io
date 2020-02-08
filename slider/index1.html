@@ -116,6 +116,8 @@
                 else {
                     object.left += speed;
                     canvas.renderAll();
+                    const recordedImage = document.getElementById('canvas').toDataURL();
+                    arr = [...arr, recordedImage];
                 }
             }
             slide();
@@ -144,7 +146,7 @@
         var margin = 0;
         var first = false;
 
-        var FPS = 30;   /// NTSC
+        var FPS = 24;   /// NTSC
         var frame = 0;
         var arr = [];
         var speed = 5;
@@ -155,7 +157,6 @@
             'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg'
         ]
 
-        var speed = 15;
         var margin = 0;
         var timer;
 
@@ -164,7 +165,6 @@
             console.log('second ' + frame / FPS);
             if (frame > 120) {
                 clearInterval(timer);
-                var zip = new JSZip();
 
                 postBlobs();
 
@@ -172,11 +172,11 @@
 
                 return;
             }
+
             const promises = slides.map(async (slide, index) => {
                 animateFrame(slide, slot1, speed);
             });
-            const recordedImage = document.getElementById('canvas').toDataURL();
-            arr = [...arr, recordedImage];
+
             //fabric.util.requestAnimFrame(loop);
         }
 
@@ -184,7 +184,7 @@
             console.log("sending");
             const url = "https://d0a2b59a.ngrok.io/gen";
             const temp = [];
-            for (let index = 10; index <= 20; index++) {
+            for (let index = 10; index <= 34; index++) {
                 temp.push(arr[index]);
             }
             const blobs = [];

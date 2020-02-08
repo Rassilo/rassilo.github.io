@@ -132,7 +132,6 @@
                             object.left += speed;
                             canvas.renderAll();
                             fabric.util.requestAnimFrame(slide);
-                            totalFrames++;
                         }
 
                     }
@@ -141,22 +140,6 @@
             })
         };
 
-        function animateFrame(object, slot, speed) {
-            if (!slot) {
-                return;
-            }
-            if (object.left > slot.width + slot.left) {
-                return;
-            }
-            else {
-                if (autoPlay) {
-                    object.left += speed;
-                    canvas.renderAll();
-                    fabric.util.requestAnimFrame(slide);
-                }
-
-            }
-        };
 
         var play = true;
         var totalFrames = 0;
@@ -166,13 +149,17 @@
 
         const main = async () => {
 
+            /* const images = [
+                 'http://media.gettyimages.com/photos/abstract-network-background-picture-id836272842?s=612x612',
+                 'http://www.socwall.com/images/wallpapers/74678-1920x1080.jpg',
+                 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg'
+             ]*/
+
             const images = [
                 'http://media.gettyimages.com/photos/abstract-network-background-picture-id836272842?s=612x612',
-                'http://www.socwall.com/images/wallpapers/74678-1920x1080.jpg',
-                'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg'
+                'http://media.gettyimages.com/photos/abstract-network-background-picture-id836272842?s=612x612',
+                'http://media.gettyimages.com/photos/abstract-network-background-picture-id836272842?s=612x612',
             ]
-
-            const speed = 5;
 
             var slot1 = new fabric.Rect({
                 originX: 'left',
@@ -296,15 +283,16 @@
         }
 
         main();
-        const context = document.getElementById('canvas');
-        const recorder = new CanvasRecorder(context, 2000000);
+        function record() {
+            const context = document.getElementById('canvas');
+            const recorder = new CanvasRecorder(context, 2000000);
+            recorder.start();
+            setTimeout(() => {
+                recorder.stop();
+                recorder.save('busy_faaaster_motion.webm');
+            }, 2000);
 
-        recorder.start();
-        setTimeout(() => {
-            recorder.stop();
-            recorder.save('busy_motion.webm');
-        }, 4000);
-
+        }
 
     </script>
 </body>
