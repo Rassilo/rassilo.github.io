@@ -335,7 +335,7 @@ if($(".scroll").length) {
             size: 210,
             lineCap: "round",
             fill: {
-                gradient: ["#f71c52", "#554c86"]
+                gradient: ["#f71c52", "#037196"]
             },
         });
     });
