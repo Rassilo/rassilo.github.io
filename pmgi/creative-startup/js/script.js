@@ -249,12 +249,12 @@ if($(".scroll").length) {
         loop: true,
         smartSpeed: 500,
         responsiveClass: true,
-        nav:false,
-        dots:false,
+        nav:true,
+        dots:true,
         autoplay: true,
-        margin:30,
+        margin:10,
         autoplayHoverPause: true,
-        autoplayTimeout: 3000,
+        autoplayTimeout: 2500,
         responsive: {
             0: {
                 items: 1,
@@ -264,7 +264,7 @@ if($(".scroll").length) {
                 items: 1,
             },
             992: {
-                items: 2,
+                items: 3,
             },
             1200: {
                 items: 4,

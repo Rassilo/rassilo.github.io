@@ -1326,8 +1326,9 @@ header
 }
 
 .stats-sec .circular-wrap h4.darkcolor {
-  max-width: 184px;
+  max-width: 250px;
   margin-left: auto;
+  text-align: justify;
   margin-right: auto;
   font-weight: 500;
   font-family: Roboto, sans-serif;
