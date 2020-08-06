@@ -237,6 +237,53 @@ if($(".scroll").length) {
         owl.trigger('prev.owl.carousel', [300]);
     });
 
+
+    
+    /* ===================================
+      Owl Carousel
+     ====================================== */
+
+    //Testimonial Slider
+
+    $('.org-carousel').owlCarousel({
+        loop: true,
+        smartSpeed: 500,
+        responsiveClass: true,
+        nav:false,
+        dots:false,
+        autoplay: true,
+        margin:30,
+        autoplayHoverPause: true,
+        autoplayTimeout: 3000,
+        responsive: {
+            0: {
+                items: 1,
+                margin: 30,
+            },
+            480: {
+                items: 1,
+            },
+            992: {
+                items: 2,
+            },
+            1200: {
+                items: 4,
+            }
+        }
+    });
+
+    $('#org-next').click(function() {
+        var owl = $('.org-carousel');
+        owl.owlCarousel();
+        owl.trigger('next.owl.carousel');
+    });
+    $('#org-prev').click(function() {
+        var owl = $('.org-carousel');
+        owl.owlCarousel();
+        owl.trigger('prev.owl.carousel', [300]);
+    });
+
+
     /* ===================================
            slick for testimonial
      ====================================== */

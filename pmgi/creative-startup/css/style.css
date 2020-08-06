@@ -319,7 +319,7 @@ ul {
 .heading {
   color: #ffffff;
   font-family: Oswald, sans-serif;
-  font-size: 60px;
+  font-size: 53px;
   font-weight: 700;
   margin-bottom: 50px;
 }
@@ -720,6 +720,7 @@ header
   width: 30%;
 }
 .header-appear .main-navigation .simple-navbar {
+  height: 60px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -764,9 +765,7 @@ header
 /* ===================================
     Side Menu
 ====================================== */
-.side-menu .bg-overlay {
-  background: rgba(247, 28, 82, 0.9);
-}
+
 .side-menu {
   width: 100%;
   position: fixed;
@@ -774,7 +773,7 @@ header
   top: 0;
   bottom: 0;
   /*background: rgba(247, 28, 82, 0.6);*/
-  background-image: url("../img/side-menu.jpg");
+  background-image: url("../img/01.jpeg");
   background-size: cover;
   background-position: center;
   z-index: 2032;
@@ -1771,7 +1770,7 @@ header
   left: 0;
   bottom: 0;
   top: 0;
-  right: 34%;
+  right: 0%;
   background-color: #ee8e00;
 }
 .blog-sec .blog-area .blog-detail .heading {
