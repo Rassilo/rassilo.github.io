@@ -2781,3 +2781,31 @@ header
     right: -11%;
   }
 }
+
+.custom-li {
+  font-size: 18px;
+  color: white;
+}
+
+.content-body {
+  width: 500px;
+  text-align: justify;
+  background: white;
+  border-radius: 34px;
+  padding: 20px;
+}
+
+.gold{
+  width: auto;
+  text-align: justify;
+  color: rgb(0, 0, 0);
+  transform: translateY(50%);
+  background: #ffffff;
+  border-radius: 34px;
+  padding: 20px;
+  box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+
+.team-box-content{
+  transform: translateY(20%);
+}
