@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Abstract Infrastructure Diagram</title>
+    <style>
+        /* Container styling */
+        #container {
+            position: relative;
+            width: 1000px;
+            height: 600px;
+            border: 1px solid #e0e0e0;
+            background-color: #f5f5f5;
+            overflow: hidden;
+        }
+
+        /* Module styling */
+        .module {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            padding: 10px;
+            width: 200px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: move;
+            user-select: none;
+            z-index: 10;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .module-name {
+            font-weight: bold;
+            font-size: 16px;
+            color: #1976d2;
+        }
+
+        .module-summary {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        /* Details section styling */
+        #details {
+            margin-top: 20px;
+            width: 1000px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #details h2 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #1976d2;
+        }
+
+        #detail-content ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        /* SVG styling for connections */
+        #connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- SVG for connections -->
+        <svg id="connections">
+            <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" 
+                        markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="black"/>
+                </marker>
+            </defs>
+        </svg>
+
+        <!-- Modules with summaries -->
+        <div class="module" id="producers" style="left: 50px; top: 50px;">
+            <div class="module-name">Producers</div>
+            <div class="module-summary">Manages data production for multiple markets with high availability.</div>
+        </div>
+        <div class="module" id="kafka" style="left: 400px; top: 50px;">
+            <div class="module-name">Kafka Cluster</div>
+            <div class="module-summary">Central message broker handling data streams with replication.</div>
+        </div>
+        <div class="module" id="consumers" style="left: 750px; top: 50px;">
+            <div class="module-name">Consumers</div>
+            <div class="module-summary">Processes and stores data from Kafka into databases.</div>
+        </div>
+        <div class="module" id="monitoring" style="left: 400px; top: 250px;">
+            <div class="module-name">Monitoring</div>
+            <div class="module-summary">Collects and visualizes system metrics for performance monitoring.</div>
+        </div>
+        <div class="module" id="databases" style="left: 750px; top: 250px;">
+            <div class="module-name">Databases</div>
+            <div class="module-summary">Stores processed data and coordinates producer instances.</div>
+        </div>
+    </div>
+
+    <!-- Details section -->
+    <div id="details">
+        <h2>Module Details</h2>
+        <div id="detail-content">Hover over a module to see details.</div>
+    </div>
+
+    <script>
+        // Define module connections
+        const moduleConnections = [
+            { source: 'producers', target: 'kafka' },
+            { source: 'kafka', target: 'consumers' },
+            { source: 'consumers', target: 'databases' },
+            { source: 'producers', target: 'databases' },
+            { source: 'monitoring', target: 'producers' },
+            { source: 'monitoring', target: 'kafka' },
+            { source: 'monitoring', target: 'consumers' }
+        ];
+
+        // Module details for hover
+        const moduleDetails = {
+            producers: `
+                <h3>Producers</h3>
+                <ul>
+                    <li>Producer-Server-1: 8 vCPUs, 16 GB RAM, 160 GB SSD
+                        <ul>
+                            <li>Producer Instances (Active + Standby)</li>
+                            <li>10+ markets, 1 active per market</li>
+                            <li>Coordination via Redis</li>
+                        </ul>
+                    </li>
+                    <li>Producer-Server-2: 8 vCPUs, 16 GB RAM, 160 GB SSD
+                        <ul>
+                            <li>Producer Instances (Active + Standby)</li>
+                            <li>10+ markets, 1 active per market</li>
+                            <li>Coordination via Redis</li>
+                        </ul>
+                    </li>
+                </ul>
+            `,
+            kafka: `
+                <h3>Kafka Cluster</h3>
+                <ul>
+                    <li>Kafka-Broker-1: 8 vCPUs, 32 GB RAM, 240 GB SSD</li>
+                    <li>Kafka-Broker-2: 8 vCPUs, 32 GB RAM, 240 GB SSD</li>
+                    <li>Kafka-Broker-3: 8 vCPUs, 32 GB RAM, 240 GB SSD</li>
+                    <li>Replication Factor = 3</li>
+                    <li>Topics: options, futures, spot, perpetuals</li>
+                </ul>
+            `,
+            consumers: `
+                <h3>Consumers</h3>
+                <ul>
+                    <li>Consumer-Server-1: 8 vCPUs, 16 GB RAM, 160 GB SSD
+                        <ul>
+                            <li>Consumer Group: MongoDB Writer</li>
+                            <li>Consumer Group: Redis Writer</li>
+                        </ul>
+                    </li>
+                    <li>Consumer-Server-2: 8 vCPUs, 16 GB RAM, 160 GB SSD
+                        <ul>
+                            <li>Consumer Group: MongoDB Writer</li>
+                            <li>Consumer Group: Redis Writer</li>
+                        </ul>
+                    </li>
+                </ul>
+            `,
+            monitoring: `
+                <h3>Monitoring</h3>
+                <ul>
+                    <li>Monitoring-Server-1: 4 vCPUs, 8 GB RAM, 80 GB SSD
+                        <ul>
+                            <li>Prometheus</li>
+                            <li>Grafana</li>
+                            <li>Alertmanager</li>
+                        </ul>
+                    </li>
+                </ul>
+            `,
+            databases: `
+                <h3>Databases</h3>
+                <ul>
+                    <li>Managed MongoDB</li>
+                    <li>Managed Redis</li>
+                </ul>
+            `
+        };
+
+        // Calculate module center for connections
+        function getCenter(module) {
+            const rect = module.getBoundingClientRect();
+            const containerRect = document.getElementById('container').getBoundingClientRect();
+            return {
+                x: rect.left - containerRect.left + rect.width / 2,
+                y: rect.top - containerRect.top + rect.height / 2
+            };
+        }
+
+        // Update SVG lines when a module moves
+        function updateConnections(module) {
+            moduleConnections.forEach(conn => {
+                if (conn.source === module.id) {
+                    const sourceCenter = getCenter(module);
+                    conn.line.setAttribute('x1', sourceCenter.x);
+                    conn.line.setAttribute('y1', sourceCenter.y);
+                } else if (conn.target === module.id) {
+                    const targetCenter = getCenter(module);
+                    conn.line.setAttribute('x2', targetCenter.x);
+                    conn.line.setAttribute('y2', targetCenter.y);
+                }
+            });
+        }
+
+        // Make a module draggable
+        function makeDraggable(module) {
+            let isDragging = false;
+            let offsetX, offsetY;
+
+            module.addEventListener('mousedown', function(e) {
+                isDragging = true;
+                const rect = module.getBoundingClientRect();
+                const containerRect = document.getElementById('container').getBoundingClientRect();
+                offsetX = e.clientX - rect.left;
+                offsetY = e.clientY - rect.top;
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (isDragging) {
+                    const container = document.getElementById('container');
+                    const containerRect = container.getBoundingClientRect();
+                    let newLeft = e.clientX - containerRect.left - offsetX;
+                    let newTop = e.clientY - containerRect.top - offsetY;
+
+                    // Keep module within container bounds
+                    newLeft = Math.max(0, Math.min(newLeft, containerRect.width - module.offsetWidth));
+                    newTop = Math.max(0, Math.min(newTop, containerRect.height - module.offsetHeight));
+
+                    module.style.left = newLeft + 'px';
+                    module.style.top = newTop + 'px';
+                    updateConnections(module);
+                }
+            });
+
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+            });
+        }
+
+        // Initialize SVG lines for connections
+        const svg = document.getElementById('connections');
+        moduleConnections.forEach(conn => {
+            const source = document.getElementById(conn.source);
+            const target = document.getElementById(conn.target);
+            const sourceCenter = getCenter(source);
+            const targetCenter = getCenter(target);
+
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', sourceCenter.x);
+            line.setAttribute('y1', sourceCenter.y);
+            line.setAttribute('x2', targetCenter.x);
+            line.setAttribute('y2', targetCenter.y);
+            line.setAttribute('stroke', 'black');
+            line.setAttribute('stroke-width', '2');
+            line.setAttribute('marker-end', 'url(#arrow)');
+            svg.appendChild(line);
+            conn.line = line; // Store reference for updates
+        });
+
+        // Apply draggable functionality to all modules
+        document.querySelectorAll('.module').forEach(makeDraggable);
+
+        // Handle hover with delay for details
+        let timeout;
+        document.querySelectorAll('.module').forEach(module => {
+            module.addEventListener('mouseover', function() {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    const moduleId = this.id;
+                    const details = moduleDetails[moduleId];
+                    document.getElementById('detail-content').innerHTML = details;
+                }, 300); // 300ms delay
+            });
+
+            module.addEventListener('mouseout', function() {
+                clearTimeout(timeout);
+                document.getElementById('detail-content').innerHTML = 'Hover over a module to see details.';
+            });
+        });
+    </script>
+</body>
+</html>
