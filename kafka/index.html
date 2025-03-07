@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Abstract Infrastructure Diagram</title>
+    <title>Enhanced Infrastructure Diagram</title>
     <style>
         /* Container styling */
         #container {
@@ -46,25 +46,53 @@
             text-align: center;
         }
 
-        /* Details section styling */
-        #details {
-            margin-top: 20px;
-            width: 1000px;
-            background-color: #f9f9f9;
-            padding: 15px;
-            border: 1px solid #e0e0e0;
-            font-family: 'Arial', sans-serif;
+        /* Detail card styling */
+        #detail-card {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 100;
+            max-width: 300px;
         }
 
-        #details h2 {
-            margin: 0 0 10px 0;
-            font-size: 18px;
+        #detail-card h3 {
+            margin: 0;
+            font-size: 16px;
             color: #1976d2;
         }
 
-        #detail-content ul {
-            margin: 0;
+        #detail-card ul {
+            margin: 5px 0;
             padding-left: 20px;
+        }
+
+        /* Cost table styling */
+        #cost-table {
+            margin-left: 20px;
+        }
+
+        #cost-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #cost-table th, #cost-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #cost-table th {
+            background-color: #f2f2f2;
+        }
+
+        /* Documentation styling */
+        #documentation {
+            margin-top: 20px;
+            width: 1000px;
         }
 
         /* SVG styling for connections */
@@ -79,44 +107,108 @@
     </style>
 </head>
 <body>
-    <div id="container">
-        <!-- SVG for connections -->
-        <svg id="connections">
-            <defs>
-                <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" 
-                        markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="black"/>
-                </marker>
-            </defs>
-        </svg>
+    <div style="display: flex;">
+        <div id="container">
+            <!-- SVG for connections -->
+            <svg id="connections">
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" 
+                            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="black"/>
+                    </marker>
+                </defs>
+            </svg>
 
-        <!-- Modules with summaries -->
-        <div class="module" id="producers" style="left: 50px; top: 50px;">
-            <div class="module-name">Producers</div>
-            <div class="module-summary">Manages data production for multiple markets with high availability.</div>
+            <!-- Modules with summaries -->
+            <div class="module" id="producers" style="left: 50px; top: 50px;">
+                <div class="module-name">Producers</div>
+                <div class="module-summary">Manages data production for multiple markets with high availability.</div>
+            </div>
+            <div class="module" id="kafka" style="left: 400px; top: 50px;">
+                <div class="module-name">Kafka Cluster</div>
+                <div class="module-summary">Central message broker handling data streams with replication.</div>
+            </div>
+            <div class="module" id="consumers" style="left: 750px; top: 50px;">
+                <div class="module-name">Consumers</div>
+                <div class="module-summary">Processes and stores data from Kafka into databases.</div>
+            </div>
+            <div class="module" id="monitoring" style="left: 400px; top: 250px;">
+                <div class="module-name">Monitoring</div>
+                <div class="module-summary">Collects and visualizes system metrics for performance monitoring.</div>
+            </div>
+            <div class="module" id="databases" style="left: 750px; top: 250px;">
+                <div class="module-name">Databases</div>
+                <div class="module-summary">Stores processed data, coordinates producer instances, and manages object storage.</div>
+            </div>
+
+            <!-- Detail card -->
+            <div id="detail-card"></div>
         </div>
-        <div class="module" id="kafka" style="left: 400px; top: 50px;">
-            <div class="module-name">Kafka Cluster</div>
-            <div class="module-summary">Central message broker handling data streams with replication.</div>
-        </div>
-        <div class="module" id="consumers" style="left: 750px; top: 50px;">
-            <div class="module-name">Consumers</div>
-            <div class="module-summary">Processes and stores data from Kafka into databases.</div>
-        </div>
-        <div class="module" id="monitoring" style="left: 400px; top: 250px;">
-            <div class="module-name">Monitoring</div>
-            <div class="module-summary">Collects and visualizes system metrics for performance monitoring.</div>
-        </div>
-        <div class="module" id="databases" style="left: 750px; top: 250px;">
-            <div class="module-name">Databases</div>
-            <div class="module-summary">Stores processed data and coordinates producer instances.</div>
+
+        <!-- Cost breakdown table -->
+        <div id="cost-table">
+            <h2>Cost Breakdown</h2>
+            <table>
+                <tr>
+                    <th>Module</th>
+                    <th>Component</th>
+                    <th>Specifications</th>
+                    <th>Monthly Cost</th>
+                </tr>
+                <tr>
+                    <td rowspan="2">Producers</td>
+                    <td>Producer-Server-1</td>
+                    <td>8 vCPUs, 16 GB RAM, 160 GB SSD</td>
+                    <td>$100</td>
+                </tr>
+                <tr>
+                    <td>Producer-Server-2</td>
+                    <td>8 vCPUs, 16 GB RAM, 160 GB SSD</td>
+                    <td>$100</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">Kafka Cluster</td>
+                    <td>Kafka-Broker-1</td>
+                    <td>8 vCPUs, 32 GB RAM, 240 GB SSD</td>
+                    <td>$150</td>
+                </tr>
+                <tr>
+                    <td>Kafka-Broker-2</td>
+                    <td>8 vCPUs, 32 GB RAM, 240 GB SSD</td>
+                    <td>$150</td>
+                </tr>
+                <tr>
+                    <td>Kafka-Broker-3</td>
+                    <td>8 vCPUs, 32 GB RAM, 240 GB SSD</td>
+                    <td>$150</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Consumer Servers</td>
+                    <td>Consumer-Server-1</td>
+                    <td>8 vCPUs, 16 GB RAM, 160 GB SSD</td>
+                    <td>$100</td>
+                </tr>
+                <tr>
+                    <td>Consumer-Server-2</td>
+                    <td>8 vCPUs, 16 GB RAM, 160 GB SSD</td>
+                    <td>$100</td>
+                </tr>
+                <tr>
+                    <td>Monitoring</td>
+                    <td>Monitoring-Server-1</td>
+                    <td>4 vCPUs, 8 GB RAM, 80 GB SSD</td>
+                    <td>$50</td>
+                </tr>
+            </table>
         </div>
     </div>
 
-    <!-- Details section -->
-    <div id="details">
-        <h2>Module Details</h2>
-        <div id="detail-content">Hover over a module to see details.</div>
+    <!-- Documentation -->
+    <div id="documentation">
+        <h2>Documentation</h2>
+        <p><strong>Infrastructure Overview</strong></p>
+        <p>This diagram represents a data processing pipeline using Kafka for message brokering, with producers generating data, consumers processing it, and databases storing the results. Monitoring ensures system health and performance.</p>
+        <!-- Add more documentation as needed -->
     </div>
 
     <script>
@@ -196,6 +288,7 @@
                 <ul>
                     <li>Managed MongoDB</li>
                     <li>Managed Redis</li>
+                    <li>Amazon S3</li>
                 </ul>
             `
         };
@@ -291,13 +384,33 @@
                 timeout = setTimeout(() => {
                     const moduleId = this.id;
                     const details = moduleDetails[moduleId];
-                    document.getElementById('detail-content').innerHTML = details;
-                }, 300); // 300ms delay
+                    const detailCard = document.getElementById('detail-card');
+                    detailCard.innerHTML = details;
+                    detailCard.style.display = 'block';
+
+                    // Position the card near the module
+                    const rect = this.getBoundingClientRect();
+                    const containerRect = document.getElementById('container').getBoundingClientRect();
+                    let cardLeft = rect.right - containerRect.left + 10;
+                    let cardTop = rect.top - containerRect.top;
+
+                    // Adjust if card goes outside container
+                    const cardWidth = 300; // Approximate width
+                    if (cardLeft + cardWidth > containerRect.width) {
+                        cardLeft = rect.left - containerRect.left - cardWidth - 10;
+                        if (cardLeft < 0) {
+                            cardLeft = 10; // Fallback position
+                        }
+                    }
+
+                    detailCard.style.left = cardLeft + 'px';
+                    detailCard.style.top = cardTop + 'px';
+                }, 300);
             });
 
             module.addEventListener('mouseout', function() {
                 clearTimeout(timeout);
-                document.getElementById('detail-content').innerHTML = 'Hover over a module to see details.';
+                document.getElementById('detail-card').style.display = 'none';
             });
         });
     </script>
