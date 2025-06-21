@@ -596,6 +596,9 @@
       .profile-img:hover {
         transform: scale(1.05);
       }
+      .dynamic-color {
+        transition: background-color 0.6s ease-in-out;
+      }
     </style>
   </head>
   <body>
@@ -628,7 +631,7 @@
           </div>
 
           <div class="header-text">
-            <h1><span>Rassil</span> Ben Rhouma</h1>
+            <h1><span class="dynamic-color">Rassil</span> Ben Rhouma</h1>
             <div class="subtitle">CTO & Co-Founder - Laevitas</div>
             <div class="contact-info">
               <div class="contact-item">
@@ -658,7 +661,10 @@
               across diverse platforms and technologies.
             </p>
             <div style="display: flex; gap: 1rem; margin-top: 1rem">
-              <a href="./uploads/Rassil_Resume.pdf" class="download-btn">
+              <a
+                href="./uploads/Rassil_Resume.pdf"
+                class="download-btn dynamic-color"
+              >
                 <i class="fas fa-download"></i> Download Resume
               </a>
               <div class="social-links">
@@ -815,8 +821,8 @@
                     architectures using producer-consumer pipelines
                   </li>
                   <li>
-                    Designed and deployed high-availability infrastructure of ETL with
-                    Nomad, Docker, Redis, and ClickHouse And Redis
+                    Designed and deployed high-availability infrastructure of
+                    ETL with Nomad, Docker, Redis, and ClickHouse And Redis
                     Streams
                   </li>
                   <li>
@@ -1159,10 +1165,10 @@
     </script>
     <script>
       // 2) grab your name’s <span>
-      const nameSpan = document.querySelector(".header-text h1 span");
+      const nameSpan = document.querySelectorAll(".dynamic-color");
       // 1) define the four gradients, in the same order as your slides
       const gradients = [
-        "linear-gradient(135deg, #ff8a00 0%, #e52e71 100%)", // 2️⃣ orange→pink
+        "linear-gradient(180deg, #ff8a00 0%, #e52e71 100%)", // 2️⃣ orange→pink
         "#fcdc04", // 3️⃣ bright yellow
         "#22c4e0", // 4️⃣ sky-blue (flat)
         "#9e8f84", // 1️⃣ taupe (flat)
@@ -1178,15 +1184,19 @@
         fadeEffect: { crossFade: true },
         on: {
           slideChange() {
-            setTimeout(() => {
-              const idx = this.realIndex % gradients.length;
-              nameSpan.style.background = gradients[idx];
-            }, 200);
+            const idx = this.realIndex % gradients.length;
+            nameSpan.forEach((node) => {
+              setTimeout(() => {
+                node.style.background = gradients[idx];
+              }, 100);
+            });
           },
         },
       });
 
-      nameSpan.style.background = gradients[0];
+      nameSpan.forEach((node) => {
+        node.style.background = gradients[0];
+      });
     </script>
   </body>
 </html>
