@@ -1,581 +1,1192 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="CTO & Co-Founder - Laevitas" />
-    <meta name="author" content="Rassil" />
-
-    <title>Resume - Rassil Ben Rhouma</title>
-
-    <!-- Bootstrap core CSS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rassil Ben Rhouma | CTO & Co-Founder - Laevitas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
-    <!-- Custom fonts for this template -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i"
       rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css"
-      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
-    <!-- Custom styles for this template -->
-    <link href="resume.min.css" rel="stylesheet" />
+    <!-- 1) Include CSS & JS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <style>
+      :root {
+        --primary: #4361ee;
+        --primary-dark: #3a56d4;
+        --secondary: #3f37c9;
+        --dark: #1a1a2e;
+        --light: #f8f9fa;
+        --gray: #6c757d;
+        --light-gray: #e9ecef;
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f5f7ff;
+        color: var(--dark);
+        line-height: 1.6;
+      }
+
+      .code-font {
+        font-family: "Roboto Mono", monospace;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--primary);
+        transition: var(--transition);
+      }
+
+      a:hover {
+        color: var(--primary-dark);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 80px 0 120px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==");
+        opacity: 0.3;
+      }
+
+      .header-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 40px;
+      }
+
+      /* force a 200×200 circle and crop overflow */
+      .profile-circle {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      /* make each slide fill the circle, cropping as needed */
+      .profile-circle .swiper-slide,
+      .profile-circle .swiper-slide img {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ensure images cover and stay centered */
+      .profile-circle .swiper-slide img {
+        object-fit: cover;
+        display: block;
+      }
+      .header-text {
+        width: fit-content;
+      }
+      .header-text h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      .header-text h1 span {
+        color: #fff;
+        /* background: rgba(255, 255, 255, 0.1); */
+        padding: 0 10px;
+        border-radius: 5px;
+        background: linear-gradient(212deg, #ff8a00 0%, #e52e71 100%);
+      }
+
+      .header-text .subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        opacity: 0.9;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 25px;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 8px 15px;
+        border-radius: 30px;
+        font-size: 0.9rem;
+      }
+
+      .social-links {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .social-link {
+        width: 40px;
+        background: white;
+        height: 40px;
+        border-radius: 50%;
+        /* background: rgba(255, 255, 255, 0.1); */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+      }
+
+      .social-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-3px);
+      }
+
+      /* Main content */
+      .main-content {
+        margin-top: -60px;
+        position: relative;
+        z-index: 10;
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        height: fit-content;
+        position: sticky;
+        top: 30px;
+      }
+
+      .sidebar-section {
+        margin-bottom: 30px;
+      }
+
+      .sidebar-section:last-child {
+        margin-bottom: 0;
+      }
+
+      .sidebar-title {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        color: var(--primary);
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .sidebar-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 3px;
+      }
+
+      .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .skill-tag {
+        background: var(--light-gray);
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        transition: var(--transition);
+      }
+
+      .skill-tag:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      .education-item {
+        margin-bottom: 15px;
+      }
+
+      .education-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .education-year {
+        font-size: 0.8rem;
+        color: var(--gray);
+        margin-bottom: 5px;
+      }
+
+      .education-degree {
+        font-weight: 500;
+        margin-bottom: 3px;
+      }
+
+      .education-school {
+        font-size: 0.9rem;
+        color: var(--gray);
+      }
+
+      /* Content */
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .section {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: var(--primary);
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 50%;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 3px;
+      }
+
+      /* Experience */
+      .experience-item {
+        margin-bottom: 30px;
+        position: relative;
+        padding-left: 30px;
+        border-left: 2px solid var(--light-gray);
+      }
+
+      .experience-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .experience-item::before {
+        content: "";
+        position: absolute;
+        left: -8px;
+        top: 5px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--primary);
+      }
+
+      .experience-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .experience-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      .experience-company {
+        color: var(--primary);
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+
+      .experience-period {
+        background: var(--light-gray);
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        height: fit-content;
+      }
+
+      .experience-description {
+        margin-bottom: 10px;
+        color: var(--gray);
+      }
+
+      .experience-highlights {
+        margin-top: 15px;
+      }
+
+      .experience-highlights li {
+        margin-bottom: 8px;
+        position: relative;
+        padding-left: 20px;
+      }
+
+      /* .experience-highlights li::before {
+        content: "▹";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+      } */
+
+      .tech-stack {
+        margin-top: 15px;
+        font-size: 0.9rem;
+      }
+
+      .tech-stack strong {
+        color: var(--primary);
+      }
+
+      /* Projects Grid */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .project-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .project-image {
+        height: 150px;
+        background: var(--light-gray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray);
+      }
+
+      .project-content {
+        padding: 20px;
+      }
+
+      .project-title {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+
+      .project-description {
+        font-size: 0.9rem;
+        color: var(--gray);
+        margin-bottom: 15px;
+      }
+
+      .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .project-tech span {
+        background: var(--light-gray);
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        .main-content {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: static;
+        }
+
+        .header-content {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .contact-info,
+        .social-links {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        header {
+          padding: 60px 0 100px;
+        }
+
+        .header-text h1 {
+          font-size: 2rem;
+        }
+        .profile-circle {
+          width: 100px;
+          height: 100px;
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 10px;
+        }
+
+        .header-content {
+          gap: 10px;
+        }
+
+        .experience-header {
+          flex-direction: column;
+          gap: 5px;
+        }
+        .section {
+          padding: 10px 5px;
+        }
+
+        .experience-period {
+          align-self: flex-start;
+        }
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section,
+      .sidebar {
+        animation: fadeIn 0.6s ease forwards;
+      }
+
+      .section:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .section:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      .section:nth-child(4) {
+        animation-delay: 0.3s;
+      }
+
+      /* Interactive elements */
+      .download-btn {
+        display: inline-block;
+        background: var(--primary);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-weight: 500;
+        transition: var(--transition);
+        box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+      }
+
+      .download-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        color: white;
+      }
+
+      .tab-buttons {
+        display: flex;
+        border-bottom: 1px solid var(--light-gray);
+        margin-bottom: 20px;
+      }
+
+      .tab-btn {
+        padding: 10px 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 500;
+        color: var(--gray);
+        position: relative;
+        transition: var(--transition);
+      }
+
+      .tab-btn.active {
+        color: var(--primary);
+      }
+
+      .tab-btn.active::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--primary);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+      .profile-img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: var(--transition);
+      }
+
+      .profile-img:hover {
+        transform: scale(1.05);
+      }
+    </style>
   </head>
-
-  <body id="page-top">
-    <nav
-      class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
-      id="sideNav"
-    >
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <span class="d-block d-lg-none">Ben Rhouma <span>Rassil</span></span>
-        <span class="d-none d-lg-block">
-          <img
-            class="img-fluid img-profile rounded-circle mx-auto mb-2"
-            src="rassil.jpg"
-            alt=""
-          />
-        </span>
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#experience"
-              >Experience</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#education"
-              >Education</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <div class="container-fluid p-0">
-      <section
-        class="resume-section p-3 p-lg-5 d-flex align-items-center"
-        id="about"
-      >
-        <div class="w-100">
-          <h1 class="mb-0">
-            <span style="color: #007bff">Rassil</span>
-            Ben Rhouma
-          </h1>
-          <div class="subheading">
-            Route Tayeb Mhiri Aouina, Tunisia · (216) 52 497 659 ·
-            <a href="mailto:br.rassil@gmail.com"
-              >br.rassil@gmail.com</a
-            >
-            |
-            <a
-              target="self"
-              href="./uploads/Rassil_Resume.pdf"
-              style="color: #007bff"
-              >Pdf Resume</a
-            >
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <!-- <img
+            src="assets/rassil-photo1.png"
+            alt="Rassil Ben Rhouma"
+            class="profile-img"
+          /> -->
+          <!-- 2) HTML structure -->
+          <div>
+            <div class="swiper-container profile-circle">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img src="assets/rassil-photo2.png" alt="" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="assets/rassil-photo3.png" alt="" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="assets/rassil-photo4.png" alt="" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="assets/rassil-photo1.png" alt="" />
+                </div>
+              </div>
+            </div>
           </div>
-          <div></div>
-          <p class="lead mb-3">
-            Dynamic and results-driven Project Leader and Co-Founder with a
-            proven track record of spearheading technological initiatives to
-            drive business growth.
-            <br />
-            Proficient in developing and executing comprehensive strategies to
-            leverage technological resources
-            <strong>efficiently</strong>, <strong>profitably</strong>, and
-            <strong>securely</strong>.
-            <br />
-            Adept at <strong>evaluating</strong>, <strong>implementing</strong>,
-            and <strong>optimizing</strong> systems and infrastructure to
-            enhance organizational effectiveness. Experienced in freelance
-            roles, adept at analyzing, designing, developing, and deploying
-            projects across diverse platforms and technologies.
-          </p>
-          <div class="social-icons">
-            <a href="https://www.linkedin.com/in/rassilbr/" target="_blank">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a href="https://github.com/Rassilo/" target="_blank">
-              <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.facebook.com/Rassil.BR" target="_blank">
-              <i class="fab fa-facebook-f"></i>
-            </a>
+
+          <div class="header-text">
+            <h1><span>Rassil</span> Ben Rhouma</h1>
+            <div class="subtitle">CTO & Co-Founder - Laevitas</div>
+            <div class="contact-info">
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Route Tayeb Mhiri Aouina, Tunisia</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>(216) 52 497 659</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>br.rassil@gmail.com</span>
+              </div>
+            </div>
+            <p class="description">
+              Dynamic and results-driven Project Leader and Co-Founder with a
+              proven track record of spearheading technological initiatives to
+              drive business growth.
+            </p>
+
+            <p class="description">
+              Adept at <strong>evaluating</strong>,
+              <strong>implementing</strong>, and
+              <strong>optimizing</strong> systems and infrastructure to enhance
+              organizational effectiveness. Experienced in deploying projects
+              across diverse platforms and technologies.
+            </p>
+            <div style="display: flex; gap: 1rem; margin-top: 1rem">
+              <a href="./uploads/Rassil_Resume.pdf" class="download-btn">
+                <i class="fas fa-download"></i> Download Resume
+              </a>
+              <div class="social-links">
+                <a
+                  href="https://www.linkedin.com/in/rassilbr/"
+                  class="social-link"
+                  target="_blank"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a
+                  href="https://github.com/Rassilo/"
+                  class="social-link"
+                  target="_blank"
+                >
+                  <i class="fab fa-github"></i>
+                </a>
+                <a
+                  href="https://www.facebook.com/Rassil.BR"
+                  class="social-link"
+                  target="_blank"
+                >
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </header>
 
-      <hr class="m-0" />
+    <div class="container">
+      <div class="main-content">
+        <aside class="sidebar">
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Skills</h3>
+            <div class="skills-list">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">NestJS</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Angular</span>
+              <span class="skill-tag">MongoDB</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Google Cloud</span>
+              <span class="skill-tag">Redis</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Jenkins</span>
+              <span class="skill-tag">Spring Boot</span>
+              <span class="skill-tag">Java</span>
+              <span class="skill-tag">PHP</span>
+              <span class="skill-tag">Symfony</span>
+              <span class="skill-tag">HTML/CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">C#</span>
+            </div>
+          </div>
 
-      <section
-        class="resume-section p-3 p-lg-5 d-flex justify-content-center"
-        id="experience"
-      >
-        <div class="w-100">
-          <h2 class="mb-5">Experience</h2>
-          <!-- Laevitas -->
-          <div
-            class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5"
-          >
-            <div class="resume-content">
-              <h3 class="mb-0">CTO & CO-FOUNDER</h3>
-              <div class="subheading mb-3">
-                <a target="_blank" href="https://laevitas.ch">Laevitas.ch</a>
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Education</h3>
+            <div class="education-item">
+              <div class="education-year">2017 - 2021</div>
+              <div class="education-degree">Master's Degree</div>
+              <div class="education-school">Esprit University</div>
+              <div class="education-major">
+                Computer Science - Web Development Track
               </div>
-              <ul>
-                <li>
+            </div>
+            <div class="education-item">
+              <div class="education-year">2014 - 2017</div>
+              <div class="education-degree">Bachelor Degree</div>
+              <div class="education-school">
+                Faculty of Science of Tunis - FST
+              </div>
+              <div class="education-major">Computer Science</div>
+            </div>
+            <div class="education-item">
+              <div class="education-year">2012 - 2014</div>
+              <div class="education-school">
+                Integrated Preparatory Cycle in Mathematics and Physics of Tunis
+                - IPEIT
+              </div>
+              <div class="education-major">Math, Physics</div>
+            </div>
+            <div class="education-item">
+              <div class="education-year">2012</div>
+              <div class="education-degree">Tunisian Baccalaureate Diploma</div>
+              <div class="education-school">High School Of Beni Khalled</div>
+              <div class="education-major">
+                Computer Science, with grade "Good"
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Tools & OS</h3>
+            <div class="skills-list">
+              <span class="skill-tag">Windows</span>
+              <span class="skill-tag">Linux</span>
+              <span class="skill-tag">Android</span>
+              <span class="skill-tag">VS Code</span>
+              <span class="skill-tag">IntelliJ</span>
+              <span class="skill-tag">Android Studio</span>
+              <span class="skill-tag">Photoshop</span>
+              <span class="skill-tag">Illustrator</span>
+              <span class="skill-tag">Figma</span>
+              <span class="skill-tag">Adobe XD</span>
+            </div>
+          </div>
+        </aside>
+
+        <main class="content">
+          <section class="section">
+            <h2 class="section-title">Professional Experience</h2>
+
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="laevitas">
+                Laevitas
+              </button>
+              <button class="tab-btn" data-tab="growapp">Growapp</button>
+              <button class="tab-btn" data-tab="surecrete">Surecrete</button>
+              <button class="tab-btn" data-tab="otdav">OTDAV</button>
+            </div>
+
+            <div id="laevitas" class="tab-content active">
+              <div class="experience-item">
+                <div class="experience-header">
+                  <div>
+                    <h3 class="experience-title">CTO & Co-Founder</h3>
+                    <div class="experience-company">
+                      <a href="https://laevitas.ch" target="_blank"
+                        >Laevitas.ch</a
+                      >
+                    </div>
+                  </div>
+                  <span class="experience-period">August 2020 - Present</span>
+                </div>
+                <div class="experience-description">
                   Led as Project Leader, CTO, and Co-Founder, driving the
                   conceptualization, development, and strategic direction of
                   Laevitas.
-                </li>
-                <li>
-                  Defined and executed the company's technological strategy,
-                  ensuring efficient, profitable, and secure utilization of
-                  resources.
-                </li>
-
-                <li>
-                  Utilized a tech stack encompassing NodeJS, NestJS, Python,
-                  Angular,Git, MongoDB, Postgres, MySQL, AWS services (Aurora,
-                  EC2, Lambda, Cost, EKS, RDS), Google Service(Functions, k8s,
-                  SQL), Redis, Docker, Jenkins, among others.
-                </li>
-                <li>
-                  Received and addressed security vulnerabilities identified by
-                  security researchers, implementing necessary fixes and
-                  enhancements.
-                </li>
-                <li>
-                  Implemented security measures throughout the project,
-                  including JWT authentication, reCAPTCHA backend, session
-                  management, rate limiting, and more.
-                </li>
-                <li>
-                  Utilized Cloudflare to protect the website and monitor
-                  malicious requests, enhancing overall security posture.
-                </li>
-                <li>
-                  Acted as Scrum Master, orchestrating Agile practices and
-                  facilitating team collaboration for streamlined project
-                  delivery.
-                </li>
-                <li>
-                  Proficiently managed project workflows using Jira and fostered
-                  knowledge sharing through Confluence.
-                </li>
-                <li>
-                  Led a multidisciplinary team in developing and deploying
-                  innovative solutions for analysis and mathematical modeling in
-                  crypto-asset derivatives markets.
-                </li>
-              </ul>
-              <p>
-                <strong
-                  >NodeJS, NestJS , Python, Angular, MongoDB Stack, Postgres,
-                  Mysql, AWS EC2, AWS LAMBDA, AWS Fargate, AWS Kinesis, Redis,
-                  Dockers, Jenkins...</strong
-                >
-              </p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">August 2020 - Present</span>
-            </div>
-          </div>
-
-          <!-- GrowApp -->
-
-          <div
-            class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5"
-          >
-            <div class="resume-content">
-              <h3 class="mb-0">Project Leader</h3>
-              <div class="subheading mb-3">
-                <a target="_blank" href="https://Growapp.digital"
-                  >Growapp.digital</a
-                >
-              </div>
-              <p>
-                Growapp.digital is a leading provider of marketing
-                software-as-a-service platforms specializing in analytics and
-                content planning for social media marketing across various
-                platforms including Facebook, Instagram, Twitter, and LinkedIn.
-              </p>
-              <ul>
-                <li>
-                  Directed projects as a Project Leader at Growapp.digital,
-                  overseeing the development and implementation of innovative
-                  marketing software solutions.
-                </li>
-                <li>
-                  Played a key role in formulating and executing strategic
-                  initiatives to drive the company's growth and market presence.
-                </li>
-                <li>
-                  Utilized a diverse tech stack including Spring Boot, NodeJS,
-                  Python, Angular, MongoDB, Postgres, Docker, and Jenkins to
-                  develop scalable and efficient software solutions.
-                </li>
-                <li>
-                  Led cross-functional teams in the design, development, and
-                  deployment of software products, ensuring adherence to project
-                  timelines and quality standards.
-                </li>
-                <li>
-                  Collaborated closely with stakeholders to gather requirements,
-                  define project scope, and prioritize features to meet business
-                  objectives.
-                </li>
-                <li>
-                  Implemented Agile methodologies to streamline project
-                  workflows, enhance team collaboration, and foster continuous
-                  improvement.
-                </li>
-                <li>
-                  Employed Docker and Jenkins for automated deployment and
-                  continuous integration, optimizing the software development
-                  lifecycle.
-                </li>
-              </ul>
-              <p>
-                <strong>
-                  Spring Boot, NodeJS, Python, Angular, MongoDB, Postgres,
-                  Postgres, Docker, Jenkins
-                </strong>
-              </p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">May 2020 - Present</span>
-            </div>
-          </div>
-
-          <!-- Sure crete -->
-          <div
-            class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5"
-          >
-            <div class="resume-content">
-              <h3 class="mb-0">Web Developer - SURECRETE CONSTRUCTION</h3>
-              <div class="subheading mb-3">
-                <a target="_blank" href="https://Sure-bid.com"> Sure-bid.com</a>
-              </div>
-              <p>
-                Sure-Bid.com is a platform designed to connect subcontractors
-                with real construction projects, facilitating discussions and
-                bidding processes.
-                <br />
-                As a Full Stack Developer, I played a crucial role in developing
-                and hosting the application.
-              </p>
-              <ul>
-                <li>
-                  Developed and maintained Sure-Bid.com, a platform connecting
-                  subcontractors with real construction projects, fostering
-                  discussions, and enabling accurate bidding processes.
-                </li>
-                <li>
-                  Acted as a Full Stack Developer, responsible for both frontend
-                  and backend development, ensuring seamless functionality and
-                  user experience.
-                </li>
-                <li>
-                  Hosted and maintained the application, leveraging best
-                  practices to ensure high availability and performance.
-                </li>
-                <li>
-                  Collaborated closely with stakeholders to gather requirements
-                  and translate them into technical specifications, ensuring
-                  alignment with business objectives.
-                </li>
-                <li>
-                  Implemented features to facilitate communication and bidding
-                  processes, enhancing user engagement and satisfaction.
-                </li>
-                <li>
-                  Employed a diverse tech stack to build and maintain the
-                  platform, including but not limited to: [List relevant
-                  technologies here].
-                </li>
-                <li>
-                  Contributed to the continuous improvement of the platform,
-                  incorporating user feedback and industry best practices to
-                  drive enhancements and optimizations.
-                </li>
-              </ul>
-              <p><strong>NodeJS , Angular , MongoDB Stack , AWS EC2</strong></p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">April 2019 - April 2020</span>
-            </div>
-          </div>
-
-          <div
-            class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5"
-          >
-            <div class="resume-content">
-              <h3 class="mb-0">JEE developer</h3>
-              <div class="subheading mb-3">OTDAV Organization</div>
-              <p>
-                The Tunisian Organization of copyrights and related rights
-                (OTDAV) is a public institution responsible for collective
-                management of copyrights and related rights..
-              </p>
-              <p><strong>JEE , WildFly , MySql</strong></p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">November 2018 - Mars 2019</span>
-            </div>
-          </div>
-
-          <div
-            class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5"
-          >
-            <div class="resume-content">
-              <h3 class="mb-0">Web Developer</h3>
-              <div class="subheading mb-3">Efrica Ecommerce</div>
-              <p>
-                African E-commerce website dedicated for the artisans around
-                africa to promote and sell their product.
-              </p>
-              <p><strong>PHP , Symfony , MySql</strong></p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">July 2017 - November 2018</span>
-            </div>
-          </div>
-
-          <div
-            class="resume-item d-flex flex-column flex-md-row justify-content-between"
-          >
-            <div class="resume-content">
-              <h3 class="mb-0">Other Apps</h3>
-              <div class="row mt-3" style="width: max-content">
-                <div class="col-md-4">
-                  <div>
-                    <h5>web</h5>
-                  </div>
-                  <p>+ Medical Service Web <strong>Laravel , php</strong></p>
-                  <p>
-                    + Tourism website <strong>ASP.Net , c# , SQL Server</strong>
-                  </p>
-                  <p>+ Security club website Angular4, Symfony</p>
-                  <p>
-                    + Student Platform
-                    <strong
-                      >Symfony (web) , JavaFX (desktop), CodeNameOne java
-                      (mobile)</strong
-                    >
-                  </p>
-                  <p>+ Survey WebSite <strong>Spring Boot, Angular6</strong></p>
                 </div>
-                <div class="col-md-4">
-                  <div>
-                    <h5>Mobile</h5>
-                  </div>
-                  <p>
-                    + Visit Card Scanner
-                    <strong>Android, OpenCV, Tesseract</strong>
-                  </p>
-                  <p>+ Ip Webcam Application <strong>Android</strong></p>
-                  <p>+ Goose Game <strong>Unity, C#</strong></p>
-                  <p>
-                    + Weather application
-                    <strong> Ionic </strong>
-                  </p>
-                </div>
-                <div class="col-md-4">
-                  <div>
-                    <h5>Desktop</h5>
-                  </div>
-                  <p>+ Stock Management system</p>
-                  <p>+ Library Management System</p>
-                  <p>+ Virtual ATM Machine</p>
-                  <p><strong>JavaFX, MySQL</strong></p>
+                <ul class="experience-highlights">
+                  <li>
+                    Defined and executed the company's technological strategy,
+                    ensuring efficient, profitable, and secure utilization of
+                    resources.
+                  </li>
+                  <li>
+                    Migrating core data processing and analytics from
+                    job/cron-based systems to real-time, event-driven
+                    architectures using producer-consumer pipelines
+                  </li>
+                  <li>
+                    Designed and deployed high-availability infrastructure of ETL with
+                    Nomad, Docker, Redis, and ClickHouse And Redis
+                    Streams
+                  </li>
+                  <li>
+                    Utilized a tech stack encompassing NodeJS, NestJS, Python,
+                    Angular, Git, MongoDB, Postgres, MySQL, AWS services
+                    (Aurora, EC2, Lambda, Cost, EKS, RDS), Google
+                    Service(Functions, k8s, SQL), Redis, Docker, Jenkins, among
+                    others.
+                  </li>
+                  <li>
+                    Received and addressed security vulnerabilities identified
+                    by security researchers, implementing necessary fixes and
+                    enhancements.
+                  </li>
+                  <li>
+                    Implemented security measures throughout the project,
+                    including JWT authentication, reCAPTCHA backend, session
+                    management, rate limiting, and more.
+                  </li>
+                  <li>
+                    Utilized Cloudflare to protect the website and monitor
+                    malicious requests, enhancing overall security posture.
+                  </li>
+                  <li>
+                    Acted as Scrum Master, orchestrating Agile practices and
+                    facilitating team collaboration for streamlined project
+                    delivery.
+                  </li>
+                  <li>
+                    Proficiently managed project workflows using Jira and
+                    fostered knowledge sharing through Confluence.
+                  </li>
+                  <li>
+                    Led a multidisciplinary team in developing and deploying
+                    innovative solutions for analysis and mathematical modeling
+                    in crypto-asset derivatives markets.
+                  </li>
+                </ul>
+                <div class="tech-stack">
+                  <strong>Technologies:</strong> NodeJS, NestJS, Python,
+                  Angular, MongoDB Stack, Postgres, Mysql, AWS EC2, AWS LAMBDA,
+                  AWS Fargate, AWS Kinesis, Redis, Dockers, Jenkins...
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <hr class="m-0" />
-
-      <section
-        class="resume-section p-3 p-lg-5 d-flex align-items-center"
-        id="education"
-      >
-        <div class="w-100">
-          <h2 class="mb-5">Education</h2>
-
-          <div
-            class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5"
-          >
-            <div class="resume-content">
-              <h3 class="mb-0">Esprit University</h3>
-              <div class="subheading mb-3">Master's Degree</div>
-              <div>Computer Science - Web Development Track</div>
+            <div id="growapp" class="tab-content">
+              <div class="experience-item">
+                <div class="experience-header">
+                  <div>
+                    <h3 class="experience-title">Project Leader</h3>
+                    <div class="experience-company">
+                      <a href="https://Growapp.digital" target="_blank"
+                        >Growapp.digital</a
+                      >
+                    </div>
+                  </div>
+                  <span class="experience-period">May 2020 - Present</span>
+                </div>
+                <div class="experience-description">
+                  Growapp.digital is a leading provider of marketing
+                  software-as-a-service platforms specializing in analytics and
+                  content planning for social media marketing across various
+                  platforms including Facebook, Instagram, Twitter, and
+                  LinkedIn.
+                </div>
+                <ul class="experience-highlights">
+                  <li>
+                    Directed projects as a Project Leader at Growapp.digital,
+                    overseeing the development and implementation of innovative
+                    marketing software solutions.
+                  </li>
+                  <li>
+                    Played a key role in formulating and executing strategic
+                    initiatives to drive the company's growth and market
+                    presence.
+                  </li>
+                  <li>
+                    Utilized a diverse tech stack including Spring Boot, NodeJS,
+                    Python, Angular, MongoDB, Postgres, Docker, and Jenkins to
+                    develop scalable and efficient software solutions.
+                  </li>
+                  <li>
+                    Led cross-functional teams in the design, development, and
+                    deployment of software products, ensuring adherence to
+                    project timelines and quality standards.
+                  </li>
+                  <li>
+                    Collaborated closely with stakeholders to gather
+                    requirements, define project scope, and prioritize features
+                    to meet business objectives.
+                  </li>
+                  <li>
+                    Implemented Agile methodologies to streamline project
+                    workflows, enhance team collaboration, and foster continuous
+                    improvement.
+                  </li>
+                  <li>
+                    Employed Docker and Jenkins for automated deployment and
+                    continuous integration, optimizing the software development
+                    lifecycle.
+                  </li>
+                </ul>
+                <div class="tech-stack">
+                  <strong>Technologies:</strong> Spring Boot, NodeJS, Python,
+                  Angular, MongoDB, Postgres, Docker, Jenkins
+                </div>
+              </div>
             </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">2017 - 2021</span>
-            </div>
-          </div>
 
-          <div
-            class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5"
-          >
-            <div class="resume-content">
-              <h3 class="mb-0">Faculty of Science of Tunis - FST</h3>
-              <div class="subheading mb-3">Bachelor Degree</div>
-              <div>Computer Science</div>
+            <div id="surecrete" class="tab-content">
+              <div class="experience-item">
+                <div class="experience-header">
+                  <div>
+                    <h3 class="experience-title">Web Developer</h3>
+                    <div class="experience-company">
+                      <a href="https://Sure-bid.com" target="_blank"
+                        >Sure-bid.com</a
+                      >
+                    </div>
+                  </div>
+                  <span class="experience-period">April 2019 - April 2020</span>
+                </div>
+                <div class="experience-description">
+                  Sure-Bid.com is a platform designed to connect subcontractors
+                  with real construction projects, facilitating discussions and
+                  bidding processes.
+                </div>
+                <ul class="experience-highlights">
+                  <li>
+                    Developed and maintained Sure-Bid.com, a platform connecting
+                    subcontractors with real construction projects, fostering
+                    discussions, and enabling accurate bidding processes.
+                  </li>
+                  <li>
+                    Acted as a Full Stack Developer, responsible for both
+                    frontend and backend development, ensuring seamless
+                    functionality and user experience.
+                  </li>
+                  <li>
+                    Hosted and maintained the application, leveraging best
+                    practices to ensure high availability and performance.
+                  </li>
+                  <li>
+                    Collaborated closely with stakeholders to gather
+                    requirements and translate them into technical
+                    specifications, ensuring alignment with business objectives.
+                  </li>
+                  <li>
+                    Implemented features to facilitate communication and bidding
+                    processes, enhancing user engagement and satisfaction.
+                  </li>
+                  <li>
+                    Contributed to the continuous improvement of the platform,
+                    incorporating user feedback and industry best practices to
+                    drive enhancements and optimizations.
+                  </li>
+                </ul>
+                <div class="tech-stack">
+                  <strong>Technologies:</strong> NodeJS, Angular, MongoDB Stack,
+                  AWS EC2
+                </div>
+              </div>
             </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">2014 - 2017</span>
-            </div>
-          </div>
-          <div
-            class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5"
-          >
-            <div class="resume-content">
-              <h3 class="mb-0">
-                Integrated Preparatory Cycle in Mathematics and Physics of Tunis
-                - IPEIT
-              </h3>
-              <div>Math, Physics</div>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">2012 - 2014</span>
-            </div>
-          </div>
-          <div
-            class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5"
-          >
-            <div class="resume-content">
-              <h3 class="mb-0">High School Of Beni Khalled</h3>
-              <div class="subheading mb-3">Tunisian Baccalaureate Diploma</div>
-              <div>Computer Science , with grade "Good"</div>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">2012</span>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <hr class="m-0" />
+            <div id="otdav" class="tab-content">
+              <div class="experience-item">
+                <div class="experience-header">
+                  <div>
+                    <h3 class="experience-title">JEE Developer</h3>
+                    <div class="experience-company">OTDAV Organization</div>
+                  </div>
+                  <span class="experience-period"
+                    >November 2018 - March 2019</span
+                  >
+                </div>
+                <div class="experience-description">
+                  The Tunisian Organization of copyrights and related rights
+                  (OTDAV) is a public institution responsible for collective
+                  management of copyrights and related rights.
+                </div>
+                <div class="tech-stack">
+                  <strong>Technologies:</strong> JEE, WildFly, MySQL
+                </div>
+              </div>
+            </div>
+          </section>
 
-      <section
-        class="resume-section p-3 p-lg-5 d-flex align-items-center"
-        id="skills"
-      >
-        <div class="w-100">
-          <h2 class="mb-5">Skills</h2>
+          <section class="section">
+            <h2 class="section-title">Other Projects</h2>
 
-          <ul class="list-inline dev-icons">
-            <li class="list-inline-item">
-              <i class="fab fa-html5"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-css3-alt"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-js-square"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-angular"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-node-js"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-npm"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-java"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-php"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-linux"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-windows"></i>
-            </li>
-            <li class="list-inline-item">
-              <img
-                style="
-                  width: 60px;
-                  height: 63px;
-                  margin-bottom: 7px;
-                  -webkit-filter: rightness(1.3) grayscale(102%);
-                  filter: brightness(1.3) grayscale(102%);
-                "
-                src="csharp.png"
-                alt=""
-              />
-            </li>
-          </ul>
+            <div class="projects-grid">
+              <div class="project-card">
+                <div class="project-image">
+                  <i class="fas fa-laptop-code fa-3x"></i>
+                </div>
+                <div class="project-content">
+                  <h3 class="project-title">Medical Service Web</h3>
+                  <p class="project-description">
+                    Web platform for medical services management
+                  </p>
+                  <div class="project-tech">
+                    <span>Laravel</span>
+                    <span>PHP</span>
+                  </div>
+                </div>
+              </div>
 
-          <div class="subheading mb-3">OS & Tools</div>
-          <ul class="fa-ul mb-0">
-            <li>
-              <i class="fa-li fa fa-check"></i>
-              Windows, Linux(Debian , Ubuntu , CentOS , Kali , ..), Android
-            </li>
-            <li>
-              <i class="fa-li fa fa-check"></i>
-              Visual Code, Intellij stack , Android Studio, NetBeans, Visual
-              Studio eclipse ...
-            </li>
-            <li>
-              <i class="fa-li fa fa-check"></i>
-              PhotoShop , Illustrator , Figma, Adobe XD
-            </li>
-          </ul>
-        </div>
-      </section>
+              <div class="project-card">
+                <div class="project-image">
+                  <i class="fas fa-globe fa-3x"></i>
+                </div>
+                <div class="project-content">
+                  <h3 class="project-title">Tourism Website</h3>
+                  <p class="project-description">
+                    Website for tourism services
+                  </p>
+                  <div class="project-tech">
+                    <span>ASP.Net</span>
+                    <span>C#</span>
+                    <span>SQL Server</span>
+                  </div>
+                </div>
+              </div>
 
-      <hr class="m-0" />
+              <div class="project-card">
+                <div class="project-image">
+                  <i class="fas fa-shield-alt fa-3x"></i>
+                </div>
+                <div class="project-content">
+                  <h3 class="project-title">Security Club Website</h3>
+                  <p class="project-description">
+                    Website for security enthusiasts club
+                  </p>
+                  <div class="project-tech">
+                    <span>Angular4</span>
+                    <span>Symfony</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-card">
+                <div class="project-image">
+                  <i class="fas fa-graduation-cap fa-3x"></i>
+                </div>
+                <div class="project-content">
+                  <h3 class="project-title">Student Platform</h3>
+                  <p class="project-description">
+                    Comprehensive platform for students
+                  </p>
+                  <div class="project-tech">
+                    <span>Symfony</span>
+                    <span>JavaFX</span>
+                    <span>CodeNameOne</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-card">
+                <div class="project-image">
+                  <i class="fas fa-poll fa-3x"></i>
+                </div>
+                <div class="project-content">
+                  <h3 class="project-title">Survey WebSite</h3>
+                  <p class="project-description">
+                    Platform for creating and managing surveys
+                  </p>
+                  <div class="project-tech">
+                    <span>Spring Boot</span>
+                    <span>Angular6</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-card">
+                <div class="project-image">
+                  <i class="fas fa-mobile-alt fa-3x"></i>
+                </div>
+                <div class="project-content">
+                  <h3 class="project-title">Visit Card Scanner</h3>
+                  <p class="project-description">
+                    Mobile app for scanning business cards
+                  </p>
+                  <div class="project-tech">
+                    <span>Android</span>
+                    <span>OpenCV</span>
+                    <span>Tesseract</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
     </div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Tab functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabBtns = document.querySelectorAll(".tab-btn");
 
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        tabBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            // Remove active class from all buttons and content
+            document
+              .querySelectorAll(".tab-btn")
+              .forEach((b) => b.classList.remove("active"));
+            document
+              .querySelectorAll(".tab-content")
+              .forEach((c) => c.classList.remove("active"));
 
-    <!-- Custom scripts for this template -->
-    <script src="script.js"></script>
+            // Add active class to clicked button and corresponding content
+            this.classList.add("active");
+            const tabId = this.getAttribute("data-tab");
+            document.getElementById(tabId).classList.add("active");
+          });
+        });
+
+        // Animate elements when they come into view
+        const animateOnScroll = function () {
+          const elements = document.querySelectorAll(".section, .sidebar");
+
+          elements.forEach((el) => {
+            const elementPosition = el.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            if (elementPosition < windowHeight - 100) {
+              el.style.opacity = "1";
+              el.style.transform = "translateY(0)";
+            }
+          });
+        };
+
+        // Initial check
+        animateOnScroll();
+
+        // Check on scroll
+        window.addEventListener("scroll", animateOnScroll);
+      });
+    </script>
+    <script>
+      // 2) grab your name’s <span>
+      const nameSpan = document.querySelector(".header-text h1 span");
+      // 1) define the four gradients, in the same order as your slides
+      const gradients = [
+        "linear-gradient(135deg, #ff8a00 0%, #e52e71 100%)", // 2️⃣ orange→pink
+        "#fcdc04", // 3️⃣ bright yellow
+        "#22c4e0", // 4️⃣ sky-blue (flat)
+        "#9e8f84", // 1️⃣ taupe (flat)
+      ];
+      const swiper = new Swiper(".profile-circle", {
+        effect: "fade",
+        loop: true,
+        speed: 1000,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        fadeEffect: { crossFade: true },
+        on: {
+          slideChange() {
+            setTimeout(() => {
+              const idx = this.realIndex % gradients.length;
+              nameSpan.style.background = gradients[idx];
+            }, 200);
+          },
+        },
+      });
+
+      nameSpan.style.background = gradients[0];
+    </script>
   </body>
 </html>

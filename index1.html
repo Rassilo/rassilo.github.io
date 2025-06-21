@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rassil Ben Rhouma - Senior Full Stack Developer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.294.0/umd/lucide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .title {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            text-align: left;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .contact-item i {
+            margin-right: 0.75rem;
+            color: #667eea;
+            width: 16px;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 0.5rem;
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.2);
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .skill-item:hover::before {
+            left: 100%;
+        }
+
+        .skill-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-category h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-category h4::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            box-shadow: 0 0 10px #667eea;
+        }
+
+        .experience-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #667eea, #764ba2, #e2e8f0);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .experience-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px) translateX(5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+            border-left-color: #764ba2;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -2.25rem;
+            top: 1.5rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: 4px solid #ffffff;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2), 0 0 20px rgba(102, 126, 234, 0.4);
+            z-index: 1;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .company-role {
+            flex: 1;
+        }
+
+        .company {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .company::before {
+            content: '🏢';
+            margin-right: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .role {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .role::before {
+            content: '👨‍💻';
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .date-location {
+            text-align: right;
+            color: #718096;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .date {
+            font-weight: 600;
+            display: block;
+            color: #667eea;
+        }
+
+        .date::before {
+            content: '📅';
+            margin-right: 0.5rem;
+        }
+
+        .location {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            color: #718096;
+        }
+
+        .location::before {
+            content: '📍';
+            margin-right: 0.5rem;
+        }
+
+        .description {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .achievements {
+            margin-bottom: 1rem;
+        }
+
+        .achievements ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .achievements li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        .achievements li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-item {
+            background: linear-gradient(135deg, #e6f3ff, #f0f8ff);
+            color: #2b6cb0;
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid #bee3f8;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-item:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .tech-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .tech-item:hover::before {
+            left: 100%;
+        }
+
+        .projects-grid {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .project-item {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border-radius: 12px;
+            padding: 1rem;
+            border-left: 3px solid #667eea;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(20px, -20px);
+        }
+
+        .project-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            border-left-color: #764ba2;
+        }
+
+        .project-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .project-title::before {
+            content: '🚀';
+            margin-right: 0.5rem;
+        }
+
+        .project-desc {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .about-text {
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .experience-timeline {
+                padding-left: 1rem;
+            }
+
+            .experience-timeline::before {
+                left: 0.5rem;
+            }
+
+            .experience-item::before {
+                left: -1.25rem;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .date-location {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile-section">
+                <div class="avatar">RB</div>
+                <h1 class="name">Rassil Ben Rhouma</h1>
+                <p class="title">Senior Full Stack Developer & Tech Lead</p>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i data-lucide="mail"></i>
+                    <span>contact@rassilbr.me</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="globe"></i>
+                    <span>rassilbr.me</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="map-pin"></i>
+                    <span>Tunis, Tunisia</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="linkedin"></i>
+                    <span>linkedin.com/in/rassilbr</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="github"></i>
+                    <span>github.com/rassilbr</span>
+                </div>
+            </div>
+
+            <section class="section">
+                <h2 class="section-title">
+                    <i data-lucide="code-2"></i>
+                    Core Technologies
+                </h2>
+                
+                <div class="skill-category">
+                    <h4>Backend</h4>
+                    <div class="skills-list">
+                        <span class="skill-item">NodeJS</span>
+                        <span class="skill-item">NestJS</span>
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">Spring Boot</span>
+                        <span class="skill-item">PHP</span>
+                        <span class="skill-item">JEE</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Frontend</h4>
+                    <div class="skills-list">
+                        <span class="skill-item">Angular</span>
+                        <span class="skill-item">Ionic</span>
+                        <span class="skill-item">React</span>
+                        <span class="skill-item">JavaFX</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Databases</h4>
+                    <div class="skills-list">
+                        <span class="skill-item">MongoDB</span>
+                        <span class="skill-item">PostgreSQL</span>
+                        <span class="skill-item">MySQL</span>
+                        <span class="skill-item">Redis</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Cloud & DevOps</h4>
+                    <div class="skills-list">
+                        <span class="skill-item">AWS EC2</span>
+                        <span class="skill-item">AWS Lambda</span>
+                        <span class="skill-item">AWS Fargate</span>
+                        <span class="skill-item">Docker</span>
+                        <span class="skill-item">Jenkins</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">
+                    <i data-lucide="trophy"></i>
+                    Key Stats
+                </h2>
+                <div class="summary-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">8+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Projects Delivered</span>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+        <main class="main-content">
+            <section class="section">
+                <h2 class="section-title">
+                    <i data-lucide="user"></i>
+                    Professional Summary
+                </h2>
+                <p class="about-text">
+                    Dynamic and results-driven Project Leader and Co-Founder with 8+ years of proven experience spearheading technological initiatives to drive business growth. Proficient in developing and executing comprehensive strategies to leverage technological resources efficiently, profitably, and securely. Adept at evaluating, implementing, and optimizing systems and infrastructure to enhance organizational effectiveness. Experienced in leading cross-functional teams and delivering end-to-end solutions across diverse platforms and technologies.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">
+                    <i data-lucide="briefcase"></i>
+                    Professional Experience
+                </h2>
+                
+                <div class="experience-timeline">
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div class="company-role">
+                                <h3 class="company">Growapp.digital</h3>
+                                <p class="role">Co-Founder & Tech Lead</p>
+                            </div>
+                            <div class="date-location">
+                                <span class="date">2021 - Present</span>
+                                <span class="location">Remote</span>
+                            </div>
+                        </div>
+                        <p class="description">
+                            Leading provider of marketing software-as-a-service platforms specializing in analytics and content planning for social media marketing across Facebook, Instagram, Twitter, and LinkedIn.
+                        </p>
+                        <div class="achievements">
+                            <ul>
+                                <li>Architected and led development of scalable SaaS platform serving 1000+ active users</li>
+                                <li>Implemented advanced analytics engine processing 10M+ social media data points daily</li>
+                                <li>Built automated content planning system with AI-driven recommendations</li>
+                                <li>Established CI/CD pipelines reducing deployment time by 70%</li>
+                            </ul>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-item">Spring Boot</span>
+                            <span class="tech-item">NodeJS</span>
+                            <span class="tech-item">Python</span>
+                            <span class="tech-item">Angular</span>
+                            <span class="tech-item">MongoDB</span>
+                            <span class="tech-item">PostgreSQL</span>
+                            <span class="tech-item">Docker</span>
+                            <span class="tech-item">Jenkins</span>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div class="company-role">
+                                <h3 class="company">Leavitas</h3>
+                                <p class="role">Senior Full Stack Developer</p>
+                            </div>
+                            <div class="date-location">
+                                <span class="date">2019 - 2021</span>
+                                <span class="location">Tunis, Tunisia</span>
+                            </div>
+                        </div>
+                        <p class="description">
+                            Software development company specializing in enterprise solutions and digital transformation projects for international clients.
+                        </p>
+                        <div class="achievements">
+                            <ul>
+                                <li>Led development team of 5 developers on enterprise-level applications</li>
+                                <li>Delivered 8+ successful projects with 100% client satisfaction rate</li>
+                                <li>Implemented microservices architecture reducing system latency by 40%</li>
+                                <li>Mentored junior developers and established coding standards</li>
+                            </ul>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-item">NodeJS</span>
+                            <span class="tech-item">Angular</span>
+                            <span class="tech-item">Spring Boot</span>
+                            <span class="tech-item">MongoDB</span>
+                            <span class="tech-item">AWS</span>
+                            <span class="tech-item">Docker</span>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div class="company-role">
+                                <h3 class="company">Sure-Bid.com</h3>
+                                <p class="role">Full Stack Developer</p>
+                            </div>
+                            <div class="date-location">
+                                <span class="date">2018 - 2019</span>
+                                <span class="location">Remote</span>
+                            </div>
+                        </div>
+                        <p class="description">
+                            Platform designed to connect subcontractors with real construction projects, facilitating discussions and bidding processes.
+                        </p>
+                        <div class="achievements">
+                            <ul>
+                                <li>Developed and deployed complete bidding platform from scratch</li>
+                                <li>Implemented real-time messaging system for contractor communications</li>
+                                <li>Built automated project matching algorithm</li>
+                                <li>Achieved 99.9% uptime with robust AWS infrastructure</li>
+                            </ul>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-item">NodeJS</span>
+                            <span class="tech-item">Angular</span>
+                            <span class="tech-item">MongoDB</span>
+                            <span class="tech-item">AWS EC2</span>
+                            <span class="tech-item">Socket.io</span>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div class="company-role">
+                                <h3 class="company">OTDAV (Tunisian Organization of Copyrights)</h3>
+                                <p class="role">Full Stack Developer</p>
+                            </div>
+                            <div class="date-location">
+                                <span class="date">2017 - 2018</span>
+                                <span class="location">Tunis, Tunisia</span>
+                            </div>
+                        </div>
+                        <p class="description">
+                            Public institution responsible for collective management of copyrights and related rights in Tunisia.
+                        </p>
+                        <div class="achievements">
+                            <ul>
+                                <li>Developed comprehensive copyright management system</li>
+                                <li>Digitized legacy processes improving efficiency by 60%</li>
+                                <li>Implemented secure document management with digital signatures</li>
+                                <li>Created reporting dashboard for management insights</li>
+                            </ul>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-item">JEE</span>
+                            <span class="tech-item">WildFly</span>
+                            <span class="tech-item">MySQL</span>
+                            <span class="tech-item">JSF</span>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div class="company-role">
+                                <h3 class="company">African E-commerce Platform</h3>
+                                <p class="role">Full Stack Developer</p>
+                            </div>
+                            <div class="date-location">
+                                <span class="date">2016 - 2017</span>
+                                <span class="location">Tunis, Tunisia</span>
+                            </div>
+                        </div>
+                        <p class="description">
+                            E-commerce website dedicated to African artisans to promote and sell their products across the continent.
+                        </p>
+                        <div class="achievements">
+                            <ul>
+                                <li>Built complete e-commerce platform supporting multiple vendors</li>
+                                <li>Integrated payment gateways for African markets</li>
+                                <li>Implemented multi-language support (English, French, Arabic)</li>
+                                <li>Developed inventory management system for artisans</li>
+                            </ul>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-item">PHP</span>
+                            <span class="tech-item">Symfony</span>
+                            <span class="tech-item">MySQL</span>
+                            <span class="tech-item">jQuery</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">
+                    <i data-lucide="rocket"></i>
+                    Additional Projects
+                </h2>
+                <div class="projects-grid">
+                    <div class="project-item">
+                        <div class="project-title">Medical Service Web Platform</div>
+                        <div class="project-desc">Healthcare management system with patient records and appointment scheduling</div>
+                        <div class="tech-stack">
+                            <span class="tech-item">Laravel</span>
+                            <span class="tech-item">PHP</span>
+                            <span class="tech-item">MySQL</span>
+                        </div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-title">Tourism Website</div>
+                        <div class="project-desc">Comprehensive tourism platform with booking and itinerary management</div>
+                        <div class="tech-stack">
+                            <span class="tech-item">ASP.Net</span>
+                            <span class="tech-item">C#</span>
+                            <span class="tech-item">SQL Server</span>
+                        </div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-title">Student Platform Suite</div>
+                        <div class="project-desc">Multi-platform student management system (Web, Desktop, Mobile)</div>
+                        <div class="tech-stack">
+                            <span class="tech-item">Symfony</span>
+                            <span class="tech-item">JavaFX</span>
+                            <span class="tech-item">CodeNameOne</span>
+                        </div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-title">Visit Card Scanner App</div>
+                        <div class="project-desc">Mobile application with OCR technology for business card digitization</div>
+                        <div class="tech-stack">
+                            <span class="tech-item">Android</span>
+                            <span class="tech-item">OpenCV</span>
+                            <span class="tech-item">Tesseract</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Add smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Add intersection observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.experience-item').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

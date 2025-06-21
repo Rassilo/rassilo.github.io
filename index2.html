@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ tab: 'Laevitas' }" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rassil Ben Rhouma – Modern Resume</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <style>
+    body { scroll-behavior: smooth; }
+    .pattern-bg { background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/geometry2.png'); }
+     [x-cloak] { display: none !important; }
+  </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+  <!-- Header -->
+  <header class="pattern-bg bg-gradient-to-r from-indigo-600 to-blue-600 bg-blend-overlay text-white py-16">
+    <div class="container mx-auto px-6 md:flex md:items-center">
+      <div class="flex-shrink-0">
+        <img src="rassil.jpg" alt="Rassil" class="w-40 h-40 rounded-full border-4 border-white shadow-lg mx-auto md:mx-0" />
+      </div>
+      <div class="mt-6 md:mt-0 md:ml-8 text-center md:text-left">
+        <h1 class="text-4xl font-bold">Rassil Ben Rhouma</h1>
+        <p class="mt-2 text-xl">CTO &amp; Co-Founder – Laevitas</p>
+        <div class="mt-4 flex flex-wrap justify-center md:justify-start gap-2">
+          <span class="inline-flex items-center bg-indigo-500 bg-opacity-50 rounded-full px-3 py-1 text-sm">
+            <svg class="w-4 h-4 mr-1" fill="currentColor"><use href="#icon-location"/></svg>
+            Route Tayeb Mhiri Aouina, Tunisia
+          </span>
+          <a href="tel:+21652497659" class="inline-flex items-center bg-indigo-500 bg-opacity-50 rounded-full px-3 py-1 text-sm">
+            <svg class="w-4 h-4 mr-1" fill="currentColor"><use href="#icon-phone"/></svg>
+            (216) 52 497 659
+          </a>
+          <a href="mailto:br.rassil@gmail.com" class="inline-flex items-center bg-indigo-500 bg-opacity-50 rounded-full px-3 py-1 text-sm">
+            <svg class="w-4 h-4 mr-1" fill="currentColor"><use href="#icon-mail"/></svg>
+            br.rassil@gmail.com
+          </a>
+        </div>
+        <div class="mt-6">
+          <a href="./uploads/Rassil_Resume.pdf" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full font-medium shadow">Download Resume</a>
+        </div>
+        <div class="mt-4 flex justify-center md:justify-start space-x-4 opacity-75 hover:opacity-100 transition">
+          <a href="https://www.linkedin.com/in/rassilbr/" target="_blank"><i class="fab fa-linkedin fa-lg"></i></a>
+          <a href="https://github.com/Rassilo/" target="_blank"><i class="fab fa-github fa-lg"></i></a>
+          <a href="https://www.facebook.com/Rassil.BR" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-6 -mt-10">
+    <div class="grid md:grid-cols-4 gap-6">
+      <!-- Skills Card -->
+      <aside class="md:col-span-1 bg-white rounded-xl shadow p-6 sticky top-6">
+        <h2 class="text-xl font-semibold text-indigo-600 mb-4">Skills</h2>
+        <div class="flex flex-wrap gap-2">
+          <template x-for="skill in ['Node.js','NestJS','Python','Angular','MongoDB','PostgreSQL','MySQL','AWS','GCP','Redis','Docker','Jenkins','Spring Boot','Java','PHP','Symfony','HTML/CSS']" :key="skill">
+            <span class="px-3 py-1 rounded-full text-sm bg-gradient-to-r from-indigo-400 to-blue-400 text-white" x-text="skill"></span>
+          </template>
+        </div>
+      </aside>
+
+      <!-- Experience Card -->
+      <section class="md:col-span-3 bg-white rounded-xl shadow p-6">
+        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">Professional Experience</h2>
+        <nav class="mb-6 border-b">
+          <ul class="flex space-x-6 text-gray-600">
+            <template x-for="company in ['Laevitas','Growapp','Sure-bid','OTDAV']" :key="company">
+              <li>
+                <button
+                  @click="tab = company"
+                  :class="{'text-indigo-600 border-b-2 border-indigo-600': tab===company, 'hover:text-indigo-500': tab!==company}"
+                  class="pb-2 font-medium"
+                  x-text="company"></button>
+              </li>
+            </template>
+          </ul>
+        </nav>
+        <!-- Tab Panels -->
+        <article x-show="tab==='Laevitas'" x-transition  x-transition x-cloak>
+          <div class="flex justify-between items-center">
+            <div>
+              <h3 class="text-xl font-semibold">CTO &amp; Co-Founder</h3>
+              <a href="https://laevitas.ch" target="_blank" class="text-indigo-500">Laevitas.ch</a>
+            </div>
+            <span class="text-sm text-gray-500">August 2020 – Present</span>
+          </div>
+          <ul class="mt-3 list-disc list-inside text-gray-700 space-y-1">
+            <li>Defined and executed technological strategy for efficient, profitable, and secure resource utilization.</li>
+            <li>Migrated analytics from cron-based to event-driven pipelines using Redis Streams &amp; Kafka.</li>
+            <li>Architected ETL on AWS Lambda &amp; ClickHouse processing 500GB/day.</li>
+            <li>Secured infrastructure: JWT auth, reCAPTCHA, rate limiting, Cloudflare WAF.</li>
+            <li>Led agile teams as Scrum Master using Jira &amp; Confluence.</li>
+          </ul>
+        </article>
+        <article x-show="tab==='Growapp'" x-transition  x-transition x-cloak>
+          <div class="flex justify-between items-center">
+            <div>
+              <h3 class="text-xl font-semibold">Project Leader</h3>
+              <a href="https://Growapp.digital" target="_blank" class="text-indigo-500">Growapp.digital</a>
+            </div>
+            <span class="text-sm text-gray-500">May 2020 – Present</span>
+          </div>
+          <p class="mt-3 text-gray-700">SaaS platform for social media analytics &amp; content planning.</p>
+          <ul class="mt-2 list-disc list-inside text-gray-700 space-y-1">
+            <li>Directed development of marketing software solutions.</li>
+            <li>Formulated growth strategies and market presence initiatives.</li>
+            <li>Tech stack: Spring Boot, NodeJS, Python, Angular, MongoDB, Postgres, Docker, Jenkins.</li>
+          </ul>
+        </article>
+        <article x-show="tab==='Sure-bid'" x-transition  x-transition x-cloak>
+          <div class="flex justify-between items-center">
+            <div>
+              <h3 class="text-xl font-semibold">Web Developer</h3>
+              <a href="https://Sure-bid.com" target="_blank" class="text-indigo-500">Sure-bid.com</a>
+            </div>
+            <span class="text-sm text-gray-500">April 2019 – April 2020</span>
+          </div>
+          <p class="mt-3 text-gray-700">Platform connecting subcontractors with real construction projects.</p>
+          <ul class="mt-2 list-disc list-inside text-gray-700 space-y-1">
+            <li>Full stack development and hosting for high availability.</li>
+            <li>Collaborated on requirements &amp; technical specifications.</li>
+            <li>Tech: NodeJS, Angular, MongoDB, AWS EC2.</li>
+          </ul>
+        </article>
+        <article x-show="tab==='OTDAV'" x-transition  x-transition x-cloak>
+          <div class="flex justify-between items-center">
+            <div>
+              <h3 class="text-xl font-semibold">JEE Developer</h3>
+              <span class="text-indigo-500">OTDAV Organization</span>
+            </div>
+            <span class="text-sm text-gray-500">Nov 2018 – Mar 2019</span>
+          </div>
+          <p class="mt-3 text-gray-700">Collective management of copyrights and related rights.</p>
+          <p class="mt-2 font-semibold text-gray-800">JEE, WildFly, MySQL</p>
+        </article>
+      </section>
+    </div>
+
+    <!-- Education & Other Apps -->
+    <div class="mt-12 grid md:grid-cols-2 gap-6">
+      <!-- Education Card -->
+      <section class="bg-white rounded-xl shadow p-6">
+        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">Education</h2>
+        <div class="space-y-6 text-gray-700">
+          <div>
+            <h3 class="text-xl font-semibold">Esprit University</h3>
+            <p>Master's Degree, Computer Science - Web Development Track <span class="text-gray-500">(2017 - 2021)</span></p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">Faculty of Science of Tunis - FST</h3>
+            <p>Bachelor Degree, Computer Science <span class="text-gray-500">(2014 - 2017)</span></p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">IPEIT</h3>
+            <p>Integrated Preparatory Cycle in Mathematics and Physics <span class="text-gray-500">(2012 - 2014)</span></p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">High School Of Beni Khalled</h3>
+            <p>Tunisian Baccalaureate Diploma, Computer Science (Good) <span class="text-gray-500">(2012)</span></p>
+          </div>
+        </div>
+      </section>
+      <!-- Other Apps Card -->
+      <section class="bg-white rounded-xl shadow p-6">
+        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">Other Apps</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-gray-700">
+          <div>
+            <h4 class="font-semibold mb-2">Web</h4>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Medical Service Web – <strong>Laravel, PHP</strong></li>
+              <li>Tourism Website – <strong>ASP.Net, C#, SQL Server</strong></li>
+              <li>Security Club Site – <strong>Angular4, Symfony</strong></li>
+              <li>Student Platform – <strong>Symfony, JavaFX, CodeNameOne</strong></li>
+              <li>Survey Website – <strong>Spring Boot, Angular6</strong></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">Mobile</h4>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Visit Card Scanner – <strong>Android, OpenCV, Tesseract</strong></li>
+              <li>IP Webcam App – <strong>Android</strong></li>
+              <li>Goose Game – <strong>Unity, C#</strong></li>
+              <li>Weather App – <strong>Ionic</strong></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">Desktop</h4>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Stock Management System</li>
+              <li>Library Management System</li>
+              <li>Virtual ATM Machine</li>
+              <li><strong>JavaFX, MySQL</strong></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="mt-12 bg-white rounded-xl shadow p-6 text-center">
+      <h2 class="text-2xl font-semibold text-indigo-600 mb-4">Contact</n
