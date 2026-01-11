@@ -367,11 +367,11 @@
       }
 
       /* .experience-highlights li::before {
-        content: "▹";
-        position: absolute;
-        left: 0;
-        color: var(--primary);
-      } */
+              content: "▹";
+              position: absolute;
+              left: 0;
+              color: var(--primary);
+            } */
 
       .tech-stack {
         margin-top: 15px;
@@ -497,6 +497,14 @@
         }
       }
 
+      @media (max-width: 368px) {
+        .sidebar {
+          max-width: 340px;
+        }
+        .content {
+          width: calc(100% - 20px);
+        }
+      }
       /* Animations */
       @keyframes fadeIn {
         from {
