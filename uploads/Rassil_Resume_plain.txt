@@ -1,0 +1,113 @@
+RASSIL BEN RHOUMA
+CTO & Co-Founder @Laevitas | rassilbr.me
++21652497659 | br.rassil@gmail.com | Route Tayeb Mhiri Aouina, Tunisia
+
+
+SUMMARY
+
+Experienced Project Leader, CTO, and Software Architect specializing in crypto
+analytics, real-time ETL pipelines, and high-performance dashboards. Proven
+expertise in migrating legacy systems to event-driven, cloud-native
+architectures with strong DevOps and observability practices.
+
+
+EXPERIENCE
+
+CTO & Co-Founder
+Laevitas.ch
+08/2020 - Present | Location
+- Co-founded and led Laevitas as CTO and Project Leader, defining and executing
+  the company's technology strategy
+- Migrating core data processing and analytics from job/cron-based systems to
+  real-time, event-driven architectures using producer-consumer pipelines
+- Designed and deployed high-availability infrastructure with Nomad, Docker,
+  Redis, and ClickHouse
+- Implemented Redis Streams and Pub/Sub for low-latency data streaming and
+  aggregation
+- Built robust monitoring and observability with Grafana, Prometheus, and
+  Elasticsearch
+- Led R&D to select and implement the best-fit ETL and database solutions for
+  high performance and efficiency.
+
+Project Leader
+Growapp.digital
+05/2020 - 07/2020 | Tunisia
+- Directed SaaS marketing analytics platforms using Spring Boot, NodeJS, Python,
+  Angular, Docker, Jenkins
+
+Full Stack Developer
+Sure-Bid.com
+04/2019 - 04/2020 | Tunisia
+- Developed a bidding platform for subcontractors using NodeJS, Angular,
+  MongoDB, AWS
+
+JEE Developer
+OTDAV Organization
+11/2018 - 03/2019 | Location
+- Developed copyright management tools (JEE, WildFly, MySQL)
+
+Web Developer
+Efrica Ecommerce
+07/2017 - 11/2018 | Tunisia
+- Built an ecommerce site for African artisans (PHP, Symfony, MySQL)
+
+
+EDUCATION
+
+Master's in Computer Science
+Esprit University
+2017 - 2021 | Tunisia
+
+Bachelor's in Computer Science
+Faculty of Science of Tunis
+2014 - 2017 | Tunis
+
+Tunisian Baccalaureate Diploma in Computer Science
+Rute of Menzeh Beni khallled
+01/2012 - 12/2012 | Tunisia
+- Tunisian Baccalaureate Diploma in Computer Science - Grade: Good ()
+
+
+KEY ACHIEVEMENTS
+
+High-Performance Dashboard
+Designed and delivered secure, high-performance dashboards with best practices
+in UX, security, and data visualization.
+
+Analytics Event Driven Architecture
+Successfully led a team to migrate analytics systems to real-time
+architectures.
+
+R&D and On-Premise Optimization
+Conducted in-depth R&D and successfully set up on-premise infrastructure to
+achieve better performance and significantly reduce operational costs.
+
+Big Data Management
+Handled and processed over 7 billion rows across SQL and NoSQL databases,
+ensuring efficient storage, fast querying, and seamless delivery to
+client-facing APIs.
+
+
+SKILLS
+
+AWS
+Postgres
+MongoDB
+ClickHouse
+Redis
+Docker
+Git Actions
+NodeJS
+Python
+Angular
+NestJS
+AWS Lambda
+Cloudflare
+Grafana
+Prometheus
+Redis Pub/Sub
+Java
+Jira
+Git Flow
+Agile Scrum
+We
