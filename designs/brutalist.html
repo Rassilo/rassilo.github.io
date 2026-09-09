@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rassil Ben Rhouma — CTO &amp; Co-Founder, Laevitas</title>
+<meta name="description" content="CTO and co-founder of Laevitas. Event-driven crypto derivatives analytics, ClickHouse, bare-metal Kubernetes." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#f2efe6; --ink:#0c0c0c; --yellow:#ffe600; --blue:#2b4cff;
+    --pink:#ff5c8a; --lime:#c6f24e; --shadow:6px 6px 0 var(--ink);
+    --shadow-sm:4px 4px 0 var(--ink);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper); color:var(--ink); font-family:"Archivo",system-ui,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+    background-image:radial-gradient(var(--ink) 1px, transparent 1px);
+    background-size:26px 26px; background-position:-13px -13px;
+  }
+  body::before{content:"";position:fixed;inset:0;background:var(--paper);opacity:.94;z-index:0;pointer-events:none}
+  .wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 20px 80px}
+  .black{font-family:"Archivo Black",Impact,sans-serif;font-weight:400;letter-spacing:-.02em}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  /* nav */
+  header.bar{position:sticky;top:0;z-index:50;background:var(--ink);color:var(--paper);border-bottom:4px solid var(--ink)}
+  .bar-in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .bar-in .logo{font-family:"Archivo Black",sans-serif;font-size:17px;background:var(--yellow);color:var(--ink);padding:3px 10px;transform:rotate(-2deg)}
+  .bar-in nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  .bar-in nav a{color:var(--paper);text-decoration:none;font-weight:600;font-size:13px;text-transform:uppercase;
+    letter-spacing:.06em;padding:5px 10px;border:2px solid transparent}
+  .bar-in nav a:hover{border-color:var(--yellow);color:var(--yellow)}
+
+  /* ticker */
+  .ticker{background:var(--yellow);border-bottom:4px solid var(--ink);overflow:hidden;white-space:nowrap}
+  .ticker .track{display:inline-block;padding:8px 0;animation:slide 34s linear infinite;font-family:"IBM Plex Mono",monospace;
+    font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+  .ticker .track span{padding:0 18px}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.ticker .track{animation:none}}
+
+  /* hero */
+  .hero{padding:52px 0 40px;display:grid;grid-template-columns:1.5fr 1fr;gap:34px;align-items:start}
+  @media(max-width:900px){.hero{grid-template-columns:1fr}}
+  .tag{display:inline-block;background:var(--blue);color:#fff;border:3px solid var(--ink);
+    padding:5px 12px;font-weight:700;text-transform:uppercase;font-size:12.5px;letter-spacing:.08em;
+    box-shadow:var(--shadow-sm);transform:rotate(-1.5deg)}
+  .hero h1{font-family:"Archivo Black",sans-serif;font-size:clamp(44px,10vw,104px);line-height:1.06;
+    letter-spacing:-.04em;margin-top:22px;text-transform:uppercase}
+  .hero h1 .hl{background:var(--yellow);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:.02em .12em;box-shadow:0 0 0 3px var(--yellow)}
+  .hero .sub{margin-top:22px;font-size:clamp(16px,2.1vw,20px);font-weight:500;max-width:52ch}
+  .hero .sub b{background:var(--lime);padding:1px 4px;border-bottom:2px solid var(--ink)}
+  .hero .acts{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;border:3px solid var(--ink);background:var(--paper);color:var(--ink);
+    padding:11px 18px;font-weight:700;text-decoration:none;box-shadow:var(--shadow);text-transform:uppercase;
+    font-size:13px;letter-spacing:.05em;transition:transform .12s,box-shadow .12s}
+  .btn:hover{transform:translate(3px,3px);box-shadow:3px 3px 0 var(--ink)}
+  .btn.y{background:var(--yellow)} .btn.b{background:var(--blue);color:#fff} .btn.p{background:var(--pink)}
+
+  .card-id{border:4px solid var(--ink);background:#fff;box-shadow:8px 8px 0 var(--ink);padding:0;overflow:hidden}
+  .card-id .ph{border-bottom:4px solid var(--ink);background:var(--lime);aspect-ratio:1/1;overflow:hidden}
+  .card-id .ph img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+    filter:grayscale(1) contrast(1.12)}
+  .card-id dl{padding:16px;font-family:"IBM Plex Mono",monospace;font-size:12.5px}
+  .card-id dt{font-weight:600;text-transform:uppercase;letter-spacing:.1em;font-size:10px;color:#6a6a6a;margin-top:12px}
+  .card-id dt:first-child{margin-top:0}
+  .card-id dd a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--yellow)}
+  .card-id dd a:hover{background:var(--yellow)}
+
+  /* section headers */
+  h2.sec{font-family:"Archivo Black",sans-serif;font-size:clamp(26px,4.6vw,46px);text-transform:uppercase;
+    letter-spacing:-.03em;margin:70px 0 26px;display:flex;align-items:center;gap:16px}
+  h2.sec i{width:16px;height:16px;background:var(--blue);border:3px solid var(--ink);display:block;flex:0 0 auto}
+  h2.sec::after{content:"";flex:1;height:4px;background:var(--ink)}
+
+  /* stat cards */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+  .sc{border:4px solid var(--ink);padding:22px;box-shadow:var(--shadow);background:#fff}
+  .sc:nth-child(1){background:var(--yellow)}
+  .sc:nth-child(2){background:var(--lime)}
+  .sc:nth-child(3){background:var(--pink)}
+  .sc:nth-child(4){background:#fff}
+  .sc .k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;font-weight:600}
+  .sc .n{font-family:"Archivo Black",sans-serif;font-size:clamp(28px,4vw,42px);line-height:1;margin-top:12px;letter-spacing:-.03em}
+  .sc .t{margin-top:12px;font-size:14px;font-weight:500;line-height:1.45}
+
+  /* experience */
+  .job{border:4px solid var(--ink);background:#fff;box-shadow:var(--shadow);margin-bottom:22px}
+  .job .head{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:16px 20px;
+    border-bottom:4px solid var(--ink);background:var(--paper)}
+  .job.lead .head{background:var(--blue);color:#fff}
+  .job .head h3{font-family:"Archivo Black",sans-serif;font-size:clamp(17px,2.4vw,24px);text-transform:uppercase;letter-spacing:-.02em}
+  .job .head .co{font-weight:700;font-size:15px}
+  .job.lead .head .co{color:var(--yellow)}
+  .job .head .when{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;
+    background:var(--ink);color:var(--paper);padding:3px 10px}
+  .job.lead .head .when{background:var(--yellow);color:var(--ink)}
+  .job .body{padding:20px}
+  .job ul{list-style:none;display:grid;gap:12px}
+  .job li{padding-left:30px;position:relative;font-size:15px;max-width:88ch}
+  .job li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;background:var(--yellow);border:2.5px solid var(--ink)}
+  .job li b{background:var(--lime);padding:0 3px}
+  .job li .num{background:var(--pink);padding:0 4px;font-weight:700;border-bottom:2px solid var(--ink)}
+  .kit{margin-top:18px;display:flex;flex-wrap:wrap;gap:7px}
+  .kit span{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:500;border:2.5px solid var(--ink);
+    padding:3px 8px;background:var(--paper)}
+  .kit span:hover{background:var(--yellow)}
+
+  /* stack */
+  .stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+  .sb{border:4px solid var(--ink);background:#fff;box-shadow:var(--shadow)}
+  .sb h4{font-family:"Archivo Black",sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.03em;
+    padding:11px 16px;border-bottom:4px solid var(--ink);background:var(--yellow)}
+  .sb:nth-child(2n) h4{background:var(--lime)}
+  .sb:nth-child(3n) h4{background:var(--pink)}
+  .sb .list{padding:16px;display:flex;flex-wrap:wrap;gap:7px}
+  .sb .list span{font-family:"IBM Plex Mono",monospace;font-size:12px;border:2.5px solid var(--ink);padding:3px 8px}
+  .sb .list span:hover{background:var(--blue);color:#fff}
+
+  /* education */
+  .edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .eb{border:4px solid var(--ink);background:#fff;box-shadow:var(--shadow);padding:20px}
+  .eb .yr{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);
+    display:inline-block;padding:2px 9px}
+  .eb h4{font-family:"Archivo Black",sans-serif;font-size:17px;margin-top:12px;text-transform:uppercase;letter-spacing:-.02em;line-height:1.15}
+  .eb p{margin-top:8px;font-size:14px;font-weight:500}
+
+  /* contact */
+  .cta-box{margin-top:70px;border:5px solid var(--ink);background:var(--yellow);box-shadow:10px 10px 0 var(--ink);
+    padding:44px 30px;text-align:center}
+  .cta-box h2{font-family:"Archivo Black",sans-serif;font-size:clamp(28px,5.6vw,58px);text-transform:uppercase;
+    letter-spacing:-.035em;line-height:.95}
+  .cta-box p{margin-top:16px;font-weight:600;font-size:16px}
+  .cta-box .acts{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .cta-box .btn{background:var(--paper)}
+  .cta-box .btn.b{background:var(--ink);color:var(--yellow)}
+
+  footer{margin-top:36px;border-top:4px solid var(--ink);padding-top:18px;display:flex;flex-wrap:wrap;gap:14px;
+    font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500}
+  footer a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--blue)}
+  footer a:hover{background:var(--blue);color:#fff}
+  footer .end{margin-left:auto}
+
+  .js .reveal{opacity:0;transform:translate(-6px,14px)}
+  .js .reveal.in{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
+  @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<script>document.documentElement.className+=" js";</script>
+
+<header class="bar">
+  <div class="bar-in">
+    <span class="logo">RASSIL BR</span>
+    <nav>
+      <a href="#numbers">Numbers</a><a href="#work">Work</a><a href="#stack">Stack</a>
+      <a href="#education">Education</a><a href="#contact">Hire me</a>
+    </nav>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="track">
+    <span>CLICKHOUSE — 7B+ ROWS</span><span>★</span><span>$8K+ / MONTH SAVED</span><span>★</span>
+    <span>99.99% API AVAILABILITY</span><span>★</span><span>EVENT-DRIVEN INGESTION</span><span>★</span>
+    <span>BARE-METAL KUBERNETES</span><span>★</span>
+    <span>CLICKHOUSE — 7B+ ROWS</span><span>★</span><span>$8K+ / MONTH SAVED</span><span>★</span>
+    <span>99.99% API AVAILABILITY</span><span>★</span><span>EVENT-DRIVEN INGESTION</span><span>★</span>
+    <span>BARE-METAL KUBERNETES</span><span>★</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div>
+      <span class="tag">CTO &amp; Co-Founder · Laevitas · Tunis</span>
+      <h1>Rassil<br /><span class="hl">Ben Rhouma</span></h1>
+      <p class="sub">
+        I build real-time data infrastructure for crypto derivatives. Co-founded <b>Laevitas</b>,
+        own the whole stack — event-driven ingestion, a <b>ClickHouse</b> warehouse on bare metal,
+        and a public market-data API that stays up.
+      </p>
+      <div class="acts">
+        <a class="btn y" href="mailto:br.rassil@gmail.com">Email me</a>
+        <a class="btn b" href="../uploads/Rassil_Ben_Rhouma_CTO.pdf">Resume PDF</a>
+        <a class="btn" href="https://www.linkedin.com/in/rassilbr/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn p" href="https://github.com/Rassilo/" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <aside class="card-id">
+      <div class="ph"><img src="../assets/rassil-photo3.png" alt="Rassil Ben Rhouma" loading="lazy" /></div>
+      <dl>
+        <dt>Role</dt><dd>CTO &amp; Co-Founder, Laevitas</dd>
+        <dt>Based</dt><dd>Tunis, Tunisia</dd>
+        <dt>Email</dt><dd><a href="mailto:br.rassil@gmail.com">br.rassil@gmail.com</a></dd>
+        <dt>Phone</dt><dd><a href="tel:+21652497659">+216 52 497 659</a></dd>
+        <dt>Languages</dt><dd>Arabic · French · English</dd>
+        <dt>Since</dt><dd>Shipping since 2017</dd>
+      </dl>
+    </aside>
+  </section>
+
+  <h2 class="sec" id="numbers"><i></i>The numbers</h2>
+  <div class="stats reveal">
+    <div class="sc"><div class="k">Database spend</div><div class="n">$8K+ SAVED</div><div class="t">Every month. Cut 92% off the database bill by benchmarking managed cloud databases against ClickHouse on bare metal, then migrating the analytics layer.</div></div>
+    <div class="sc"><div class="k">API availability</div><div class="n">99.99%</div><div class="t">On the public market-data API: caching, sliding-window rate limiting, graceful degradation, SLO alerting.</div></div>
+    <div class="sc"><div class="k">Production data</div><div class="n">7B+ rows</div><div class="t">Options and futures tick data in ClickHouse, queried sub-second by client dashboards and vol-surface analytics.</div></div>
+    <div class="sc"><div class="k">Data latency</div><div class="n">&lt; 1 sec</div><div class="t">Cron and batch jobs replaced with a replayable producer–consumer pipeline on NATS JetStream and Redis Streams.</div></div>
+  </div>
+
+  <h2 class="sec" id="work"><i></i>Work</h2>
+
+  <article class="job lead reveal">
+    <div class="head"><h3>CTO &amp; Co-Founder</h3><span class="co">Laevitas.ch</span><span class="when">08/2020 — NOW</span></div>
+    <div class="body">
+      <ul>
+        <li>Own technology end to end — architecture, infrastructure, security and the engineering team — from co-founding the company to a production platform serving trading desks and quant teams.</li>
+        <li>Re-architected core analytics from cron/batch jobs to an <b>event-driven pipeline</b> on NATS JetStream and Redis Streams: producer–consumer, replay, at-least-once delivery, <span class="num">sub-second latency</span>.</li>
+        <li>Benchmarked MongoDB Atlas, AWS Aurora and other managed databases against 1.5 TB of lagging market data, then consolidated onto <b>ClickHouse on bare metal</b> — <span class="num">over $8,000/month saved</span>, with faster queries.</li>
+        <li>Architected and operate <b>self-managed Kubernetes (k3s)</b> on bare metal across production and analytics clusters: HA ClickHouse, zero-downtime rollouts, autoscaling, infrastructure as code.</li>
+        <li>Raised public API availability to <span class="num">99.99%</span> with multi-layer caching, sliding-window rate limiting, graceful degradation and Prometheus/Grafana SLO alerting.</li>
+        <li>Shipped AI-native access: an <b>MCP server</b> exposing 30+ market-data tools over OAuth 2.1, plus LLM-driven anomaly detection on live derivatives flow.</li>
+        <li>Own billing end to end — <b>Stripe</b> subscriptions, entitlements, webhooks and invoicing tied to API-key tiers and usage quotas, plus <b>x402</b> on-chain pay-per-request micropayments.</li>
+        <li>Built observability from zero across ingestion, storage and API (Grafana, Prometheus, Elasticsearch) and automated runbooks with n8n, including a custom Redis Streams trigger node.</li>
+      </ul>
+      <div class="kit"><span>ClickHouse</span><span>NATS JetStream</span><span>Redis Streams</span><span>k3s</span><span>Docker</span><span>NestJS</span><span>Angular</span><span>Grafana</span><span>Prometheus</span><span>Stripe</span><span>MCP</span></div>
+    </div>
+  </article>
+
+  <article class="job reveal">
+    <div class="head"><h3>Project Leader</h3><span class="co">Growapp.digital</span><span class="when">05/2020 — 07/2020</span></div>
+    <div class="body">
+      <ul><li>Directed delivery of SaaS marketing-analytics platforms, hands-on across backend and frontend.</li></ul>
+      <div class="kit"><span>Spring Boot</span><span>Node.js</span><span>Python</span><span>Angular</span><span>Docker</span><span>Jenkins</span></div>
+    </div>
+  </article>
+
+  <article class="job reveal">
+    <div class="head"><h3>Full Stack Developer</h3><span class="co">Sure-Bid.com</span><span class="when">04/2019 — 04/2020</span></div>
+    <div class="body">
+      <ul><li>Built a bidding platform connecting subcontractors, from database schema through to deployment.</li></ul>
+      <div class="kit"><span>Node.js</span><span>Angular</span><span>MongoDB</span><span>AWS</span></div>
+    </div>
+  </article>
+
+  <article class="job reveal">
+    <div class="head"><h3>JEE Developer</h3><span class="co">OTDAV</span><span class="when">11/2018 — 03/2019</span></div>
+    <div class="body">
+      <ul><li>Developed copyright-management tooling for a national public institution.</li></ul>
+      <div class="kit"><span>JEE</span><span>WildFly</span><span>MySQL</span></div>
+    </div>
+  </article>
+
+  <article class="job reveal">
+    <div class="head"><h3>Web Developer</h3><span class="co">Efrica Ecommerce</span><span class="when">07/2017 — 11/2018</span></div>
+    <div class="body">
+      <ul><li>Built and shipped an ecommerce platform for African artisans.</li></ul>
+      <div class="kit"><span>PHP</span><span>Symfony</span><span>MySQL</span></div>
+    </div>
+  </article>
+
+  <h2 class="sec" id="stack"><i></i>Stack</h2>
+  <div class="stack reveal">
+    <div class="sb"><h4>Data &amp; storage</h4><div class="list"><span>ClickHouse</span><span>NATS JetStream</span><span>Kafka</span><span>Redis Streams</span><span>Redis Pub/Sub</span><span>MongoDB</span><span>PostgreSQL</span><span>Aurora</span></div></div>
+    <div class="sb"><h4>Backend</h4><div class="list"><span>NestJS</span><span>Node.js</span><span>TypeScript</span><span>Python</span><span>Java / JEE</span><span>REST</span><span>GraphQL</span><span>WebSockets</span></div></div>
+    <div class="sb"><h4>Frontend</h4><div class="list"><span>Angular</span><span>TypeScript</span><span>TradingView</span><span>ECharts</span><span>TailwindCSS</span></div></div>
+    <div class="sb"><h4>Infrastructure</h4><div class="list"><span>Kubernetes (k3s)</span><span>Docker</span><span>Nomad</span><span>AWS Lambda</span><span>S3</span><span>Hetzner</span><span>Cloudflare</span><span>GitHub Actions</span></div></div>
+    <div class="sb"><h4>Observability</h4><div class="list"><span>Grafana</span><span>Prometheus</span><span>Elasticsearch</span><span>SLO &amp; alerting</span></div></div>
+    <div class="sb"><h4>Payments &amp; AI</h4><div class="list"><span>Stripe</span><span>x402</span><span>usage metering</span><span>quotas</span><span>MCP</span><span>LLM features</span><span>n8n</span></div></div>
+  </div>
+
+  <h2 class="sec" id="education"><i></i>Education</h2>
+  <div class="edu reveal">
+    <div class="eb"><span class="yr">2017 — 2021</span><h4>Master's, Computer Science</h4><p>Esprit School of Engineering · Tunis, Tunisia</p></div>
+    <div class="eb"><span class="yr">2014 — 2017</span><h4>Bachelor's, Computer Science</h4><p>Faculty of Sciences of Tunis · Tunis, Tunisia</p></div>
+    <div class="eb"><span class="yr">2012</span><h4>Baccalaureate, Computer Science</h4><p>High School of Beni Khalled · Grade: Good</p></div>
+    <div class="eb"><span class="yr">LANGUAGES</span><h4>Arabic / French / English</h4><p>Arabic native. French and English professional.</p></div>
+  </div>
+
+  <section class="cta-box" id="contact">
+    <h2>Got infrastructure<br />that has to be fast?</h2>
+    <p>Architecture reviews · real-time data platforms · cost-down migrations · CTO conversations</p>
+    <div class="acts">
+      <a class="btn b" href="mailto:br.rassil@gmail.com">br.rassil@gmail.com</a>
+      <a class="btn" href="tel:+21652497659">+216 52 497 659</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>&copy; <span id="yr">2026</span> RASSIL BEN RHOUMA · TUNIS, TUNISIA</span>
+    <a href="https://www.linkedin.com/in/rassilbr/" target="_blank" rel="noopener">LINKEDIN</a>
+    <a href="https://github.com/Rassilo/" target="_blank" rel="noopener">GITHUB</a>
+    <a class="end" href="./">OTHER DESIGNS</a>
+  </footer>
+</div>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>

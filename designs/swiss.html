@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rassil Ben Rhouma — CTO &amp; Co-Founder, Laevitas</title>
+<meta name="description" content="CTO and co-founder of Laevitas. Real-time crypto derivatives analytics infrastructure." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#ffffff; --ink:#000000; --ink-2:#404040; --muted:#8e8e8e;
+    --rule:#d8d8d8; --red:#d0021b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:"Archivo",Helvetica,Arial,sans-serif;
+    font-size:15px; line-height:1.45; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* icons */
+  .i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.7;
+     stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.13em}
+  .si{display:inline-block;width:15px;height:15px;background:var(--c,currentColor);flex:none;
+     -webkit-mask-image:var(--i);mask-image:var(--i);
+     -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+     -webkit-mask-position:center;mask-position:center;
+     -webkit-mask-size:contain;mask-size:contain}
+
+  /* brand palette — contrast-checked against this page's ground */
+  .si-amazonwebservices{--i:url(../assets/stack/amazonwebservices.svg);--c:#232F3E}
+  .si-angular{--i:url(../assets/stack/angular.svg);--c:#0F0F11}
+  .si-apachekafka{--i:url(../assets/stack/apachekafka.svg);--c:#231F20}
+  .si-clickhouse{--i:url(../assets/stack/clickhouse.svg);--c:#9A7B00}
+  .si-cloudflare{--i:url(../assets/stack/cloudflare.svg);--c:#BE5F00}
+  .si-docker{--i:url(../assets/stack/docker.svg);--c:#2496ED}
+  .si-elasticsearch{--i:url(../assets/stack/elasticsearch.svg);--c:#005571}
+  .si-githubactions{--i:url(../assets/stack/githubactions.svg);--c:#2088FF}
+  .si-grafana{--i:url(../assets/stack/grafana.svg);--c:#C25200}
+  .si-hashicorp{--i:url(../assets/stack/hashicorp.svg);--c:#000000}
+  .si-jenkins{--i:url(../assets/stack/jenkins.svg);--c:#D24939}
+  .si-kubernetes{--i:url(../assets/stack/kubernetes.svg);--c:#326CE5}
+  .si-mongodb{--i:url(../assets/stack/mongodb.svg);--c:#47A248}
+  .si-mysql{--i:url(../assets/stack/mysql.svg);--c:#4479A1}
+  .si-n8n{--i:url(../assets/stack/n8n.svg);--c:#EA4B71}
+  .si-natsdotio{--i:url(../assets/stack/natsdotio.svg);--c:#1B7FA8}
+  .si-nestjs{--i:url(../assets/stack/nestjs.svg);--c:#E0234E}
+  .si-nodedotjs{--i:url(../assets/stack/nodedotjs.svg);--c:#5FA04E}
+  .si-openjdk{--i:url(../assets/stack/openjdk.svg);--c:#000000}
+  .si-php{--i:url(../assets/stack/php.svg);--c:#777BB4}
+  .si-postgresql{--i:url(../assets/stack/postgresql.svg);--c:#4169E1}
+  .si-prometheus{--i:url(../assets/stack/prometheus.svg);--c:#E6522C}
+  .si-python{--i:url(../assets/stack/python.svg);--c:#3776AB}
+  .si-redis{--i:url(../assets/stack/redis.svg);--c:#FF4438}
+  .si-spring{--i:url(../assets/stack/spring.svg);--c:#4E8A28}
+  .si-stripe{--i:url(../assets/stack/stripe.svg);--c:#635BFF}
+  .si-symfony{--i:url(../assets/stack/symfony.svg);--c:#000000}
+  .si-tailwindcss{--i:url(../assets/stack/tailwindcss.svg);--c:#07899E}
+  .si-tradingview{--i:url(../assets/stack/tradingview.svg);--c:#131622}
+  .si-typescript{--i:url(../assets/stack/typescript.svg);--c:#3178C6}
+
+
+  .sheet{max-width:1200px;margin:0 auto;padding:0 36px 100px;position:relative}
+  @media(max-width:700px){.sheet{padding:0 20px 70px}}
+  .sheet::before{
+    content:"";position:absolute;top:0;bottom:0;left:36px;right:36px;pointer-events:none;
+    background-image:repeating-linear-gradient(to right,var(--rule) 0 1px,transparent 1px calc(100%/6));
+    background-size:100% 100%;opacity:.3;
+  }
+  @media(max-width:700px){.sheet::before{display:none}}
+  .sheet > *{position:relative}
+
+  .micro{font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+  .micro.red{color:var(--red)}
+
+  /* masthead */
+  .top{display:grid;grid-template-columns:repeat(6,1fr);border-bottom:2px solid var(--ink);
+    padding:18px 0 10px;align-items:end}
+  @media(max-width:700px){.top{grid-template-columns:1fr;gap:6px}}
+  .top .a{grid-column:span 3}
+  .top .b{grid-column:span 3;text-align:right}
+  @media(max-width:700px){.top .b{text-align:left}}
+  .top .b nav{display:inline-flex;gap:20px;flex-wrap:wrap}
+  .top .b nav a{font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:600}
+  .top .b nav a:hover{color:var(--red)}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:repeat(6,1fr);padding:40px 0 36px;border-bottom:1px solid var(--ink)}
+  @media(max-width:900px){.hero{grid-template-columns:1fr;gap:26px}}
+  .hero .name{grid-column:span 3;padding-right:24px}
+  .hero h1{font-size:clamp(38px,6.4vw,72px);font-weight:600;line-height:.94;letter-spacing:-.045em;
+    text-transform:uppercase}
+  .hero h1 span{display:block}
+  .hero .role{margin-top:18px;font-size:clamp(15px,1.9vw,18px);font-weight:500;letter-spacing:-.01em;max-width:32ch}
+  .hero .role em{font-style:normal;color:var(--red)}
+
+  .hero .shot{grid-column:span 1;padding-right:20px}
+  @media(max-width:900px){.hero .shot{max-width:180px}}
+  .hero .shot img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;
+    border:1px solid var(--ink);background:#f1f1f1;filter:grayscale(1) contrast(1.06)}
+  .hero .shot .cap{margin-top:8px}
+
+  .hero .side{grid-column:span 2;border-left:1px solid var(--rule);padding-left:20px}
+  @media(max-width:900px){.hero .side{border-left:0;padding-left:0}}
+  .hero .side dl{margin-top:10px}
+  .hero .side dt{margin-top:12px}
+  .hero .side dt:first-child{margin-top:0}
+  .hero .side dd{font-size:14px;margin-top:2px}
+  .hero .side dd a{border-bottom:1px solid var(--rule);display:inline-flex;align-items:center;gap:7px}
+  .hero .side dd a .i{width:13px;height:13px;color:var(--muted)}
+  .hero .side dd a:hover{border-color:var(--red);color:var(--red)}
+  .hero .side dd a:hover .i{color:var(--red)}
+
+  /* abstract */
+  .abstract{display:grid;grid-template-columns:repeat(6,1fr);padding:26px 0;border-bottom:1px solid var(--ink)}
+  @media(max-width:820px){.abstract{grid-template-columns:1fr}}
+  .abstract .k{grid-column:span 1;padding-right:16px}
+  .abstract .t{grid-column:span 5;font-size:clamp(16px,2vw,19px);line-height:1.42;max-width:64ch;
+    letter-spacing:-.012em;color:var(--ink-2)}
+  .abstract .t b{color:var(--ink);font-weight:600}
+
+  /* daily strip */
+  .strip{display:grid;grid-template-columns:repeat(6,1fr);padding:14px 0;border-bottom:1px solid var(--ink);
+    align-items:center}
+  @media(max-width:820px){.strip{grid-template-columns:1fr;gap:10px}}
+  .strip .k{grid-column:span 1}
+  .strip .set{grid-column:span 5;display:flex;gap:20px;flex-wrap:wrap;align-items:center;color:var(--muted)}
+  .strip .set .si{width:19px;height:19px}
+
+  /* figures */
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--ink)}
+  @media(max-width:900px){.figs{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.figs{grid-template-columns:1fr}}
+  .fig{padding:24px 20px 24px 0;border-right:1px solid var(--rule)}
+  .fig:last-child{border-right:0}
+  .fig .v{font-size:clamp(26px,3.6vw,40px);font-weight:600;letter-spacing:-.045em;line-height:.98;margin-top:10px}
+  .fig .v em{font-style:normal;font-weight:400;color:var(--muted)}
+  .fig .d{margin-top:12px;font-size:13px;color:var(--ink-2);line-height:1.45;max-width:28ch}
+
+  /* section */
+  .sec{border-bottom:1px solid var(--ink);padding:32px 0}
+  .sec-h{display:grid;grid-template-columns:repeat(6,1fr);align-items:baseline;margin-bottom:20px}
+  .sec-h .n{grid-column:span 1}
+  .sec-h h2{grid-column:span 5;font-size:clamp(20px,2.6vw,28px);font-weight:600;
+    letter-spacing:-.03em;text-transform:uppercase}
+
+  .entry{display:grid;grid-template-columns:repeat(6,1fr);padding:20px 0;border-top:1px solid var(--rule)}
+  .entry:first-of-type{border-top:0}
+  @media(max-width:820px){.entry{grid-template-columns:1fr;gap:8px}}
+  .entry .c1{grid-column:span 1;padding-right:16px}
+  .entry .c2{grid-column:span 5}
+  .entry .when{font-size:12px;font-weight:600;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+  .entry .org{margin-top:6px;font-size:13px;color:var(--muted)}
+  .entry h3{font-size:clamp(17px,2.1vw,21px);font-weight:600;letter-spacing:-.025em;text-transform:uppercase}
+  .entry ul{list-style:none;margin-top:12px;display:grid;gap:8px;max-width:74ch}
+  .entry li{color:var(--ink-2);padding-left:20px;position:relative}
+  .entry li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1px;background:var(--red)}
+  .entry li b{color:var(--ink);font-weight:600}
+
+  .chips{margin-top:14px;display:flex;flex-wrap:wrap;gap:0}
+  .chip{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;letter-spacing:.04em;
+    text-transform:uppercase;font-weight:500;color:var(--ink-2);
+    border:1px solid var(--rule);padding:4px 9px;margin:-1px 0 0 -1px;background:var(--paper)}
+  .chip .si{width:14px;height:14px}
+  .chip:hover{border-color:var(--ink);color:var(--ink);z-index:1}
+
+  /* rows */
+  .rowset{display:grid}
+  .r{display:grid;grid-template-columns:repeat(6,1fr);padding:12px 0;border-top:1px solid var(--rule)}
+  .r:first-child{border-top:0}
+  @media(max-width:820px){.r{grid-template-columns:1fr;gap:6px}}
+  .r .k{grid-column:span 1;padding-right:16px;padding-top:5px}
+  .r .v{grid-column:span 5;color:var(--ink-2);font-size:14.5px}
+  .r .v .chips{margin-top:0}
+
+  footer{display:grid;grid-template-columns:repeat(6,1fr);padding:22px 0 0;gap:10px}
+  @media(max-width:820px){footer{grid-template-columns:1fr}}
+  footer .f1{grid-column:span 3;font-size:12px;color:var(--muted)}
+  footer .f2{grid-column:span 3;text-align:right;font-size:12px;display:flex;gap:18px;
+    justify-content:flex-end;flex-wrap:wrap}
+  @media(max-width:820px){footer .f2{justify-content:flex-start;text-align:left}}
+  footer a{border-bottom:1px solid var(--rule);display:inline-flex;align-items:center;gap:6px}
+  footer a:hover{color:var(--red);border-color:var(--red)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 16.5v-9Z"/><path d="m4.2 7.2 7.8 5.8 7.8-5.8"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2 4.5 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3Z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.4"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M7.6 10.6V17M7.6 7.4v.01M11.6 17v-3.5a2.4 2.4 0 0 1 4.8 0V17"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19.2c-3.8 1.1-3.8-2-5.3-2.5M15 21.5v-3.4c0-.9.2-1.6-.4-2.2 2.6-.3 5.2-1.3 5.2-5.7a4.4 4.4 0 0 0-1.2-3.1 4.1 4.1 0 0 0-.1-3.1s-1-.3-3.3 1.2a11.3 11.3 0 0 0-6 0C6 3.7 5 4 5 4a4.1 4.1 0 0 0-.1 3.1 4.4 4.4 0 0 0-1.2 3.1c0 4.4 2.6 5.4 5.2 5.7-.4.4-.5.9-.5 1.4v3.2"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></symbol>
+</defs></svg>
+
+<div class="sheet">
+
+  <div class="top">
+    <div class="a"><span class="micro">Rassil Ben Rhouma — Curriculum Vitae</span></div>
+    <div class="b">
+      <nav>
+        <a href="#figures">Figures</a><a href="#experience">Experience</a>
+        <a href="#stack">Stack</a><a href="#education">Education</a>
+      </nav>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="name">
+      <h1><span>Rassil</span><span>Ben Rhouma</span></h1>
+      <p class="role">CTO &amp; Co-Founder, <em>Laevitas</em> — real-time data infrastructure for crypto derivatives.</p>
+    </div>
+    <div class="shot">
+      <img src="../assets/rassil-photo1ee.png" alt="Rassil Ben Rhouma" />
+      <div class="cap micro">Tunis, 2026</div>
+    </div>
+    <div class="side">
+      <span class="micro red">Contact</span>
+      <dl>
+        <dt class="micro">Email</dt><dd><a href="mailto:br.rassil@gmail.com"><svg class="i"><use href="#i-mail"/></svg>br.rassil@gmail.com</a></dd>
+        <dt class="micro">Phone</dt><dd><a href="tel:+21652497659"><svg class="i"><use href="#i-phone"/></svg>+216 52 497 659</a></dd>
+        <dt class="micro">Based</dt><dd>Tunis, Tunisia</dd>
+        <dt class="micro">Profiles</dt><dd>
+          <a href="https://www.linkedin.com/in/rassilbr/" target="_blank" rel="noopener"><svg class="i"><use href="#i-linkedin"/></svg>LinkedIn</a>
+          <a href="https://github.com/Rassilo/" target="_blank" rel="noopener"><svg class="i"><use href="#i-github"/></svg>GitHub</a>
+          <a href="../uploads/Rassil_Ben_Rhouma_CTO.pdf"><svg class="i"><use href="#i-file"/></svg>PDF</a>
+        </dd>
+      </dl>
+    </div>
+  </header>
+
+  <section class="abstract">
+    <div class="k"><span class="micro">Abstract</span></div>
+    <p class="t">
+      I co-founded <b>Laevitas</b> and run its technology end to end — a crypto derivatives analytics platform
+      used by trading desks and quant teams. Event-driven ingestion on NATS JetStream and Redis Streams, a
+      <b>ClickHouse</b> warehouse holding seven billion rows of tick data on bare metal, and a public
+      market-data API on self-managed Kubernetes. Nine years building infrastructure that has to be correct
+      while the market is open.
+    </p>
+  </section>
+
+  <section class="strip">
+    <div class="k"><span class="micro">Daily</span></div>
+    <div class="set">
+      <span class="si si-clickhouse" title="ClickHouse"></span>
+      <span class="si si-natsdotio" title="NATS"></span>
+      <span class="si si-redis" title="Redis"></span>
+      <span class="si si-kubernetes" title="Kubernetes"></span>
+      <span class="si si-docker" title="Docker"></span>
+      <span class="si si-nestjs" title="NestJS"></span>
+      <span class="si si-angular" title="Angular"></span>
+      <span class="si si-typescript" title="TypeScript"></span>
+      <span class="si si-grafana" title="Grafana"></span>
+      <span class="si si-prometheus" title="Prometheus"></span>
+      <span class="si si-elasticsearch" title="Elasticsearch"></span>
+      <span class="si si-stripe" title="Stripe"></span>
+    </div>
+  </section>
+
+  <section class="figs" id="figures">
+    <div class="fig"><span class="micro">01 / Cost</span><div class="v">$8K+ <em>/ mo</em></div><div class="d">Saved on monthly database spend — a 92% cut — by migrating the analytics layer onto ClickHouse on bare metal.</div></div>
+    <div class="fig"><span class="micro">02 / Reliability</span><div class="v">99.99<em>%</em></div><div class="d">Public market-data API availability: caching, rate limiting, graceful degradation, SLO alerting.</div></div>
+    <div class="fig"><span class="micro">03 / Scale</span><div class="v">7 <em>bn</em></div><div class="d">Rows of options and futures tick data in production, served sub-second to client dashboards.</div></div>
+    <div class="fig"><span class="micro">04 / Evidence</span><div class="v">1.5 <em>TB</em></div><div class="d">Of lagging market data benchmarked across managed databases before the migration decision.</div></div>
+  </section>
+
+  <section class="sec" id="experience">
+    <div class="sec-h"><span class="n micro red">Section 01</span><h2>Experience</h2></div>
+
+    <article class="entry">
+      <div class="c1"><div class="when">2020—</div><div class="org">Laevitas<br />Tunis, Tunisia</div></div>
+      <div class="c2">
+        <h3>CTO &amp; Co-Founder</h3>
+        <ul>
+          <li>Own technology end to end — architecture, infrastructure, security and the engineering team — from co-founding the company to a production platform serving trading desks.</li>
+          <li>Re-architected core analytics from cron and batch jobs into an <b>event-driven pipeline</b> on NATS JetStream and Redis Streams: producer–consumer, replay, at-least-once delivery, sub-second data latency.</li>
+          <li>Ran MongoDB Atlas, AWS Aurora and other managed databases against 1.5 TB of lagging market data, then consolidated onto <b>ClickHouse on bare metal</b> — over $8,000 a month saved, multi-second queries to sub-second.</li>
+          <li>Architected and operate <b>self-managed Kubernetes (k3s)</b> on bare metal across production and analytics clusters: HA ClickHouse, zero-downtime rollouts, autoscaling, infrastructure as code.</li>
+          <li>Raised public API availability to <b>99.99%</b> with multi-layer caching, sliding-window rate limiting, graceful degradation and Prometheus/Grafana SLO alerting.</li>
+          <li>Shipped AI-native access: an <b>MCP server</b> exposing 30+ market-data tools over OAuth 2.1, plus LLM-driven anomaly detection on live derivatives flow.</li>
+          <li>Own billing and payments — Stripe subscriptions, entitlements, webhooks and invoicing tied to API-key tiers and usage quotas, then x402 on-chain pay-per-request micropayments.</li>
+          <li>Built observability from zero across ingestion, storage and API (Grafana, Prometheus, Elasticsearch) and automated runbooks with n8n, including a custom Redis Streams trigger node.</li>
+        </ul>
+        <div class="chips">
+          <span class="chip"><span class="si si-clickhouse"></span>ClickHouse</span>
+          <span class="chip"><span class="si si-natsdotio"></span>NATS JetStream</span>
+          <span class="chip"><span class="si si-redis"></span>Redis Streams</span>
+          <span class="chip"><span class="si si-kubernetes"></span>k3s</span>
+          <span class="chip"><span class="si si-nestjs"></span>NestJS</span>
+          <span class="chip"><span class="si si-angular"></span>Angular</span>
+          <span class="chip"><span class="si si-grafana"></span>Grafana</span>
+          <span class="chip"><span class="si si-stripe"></span>Stripe</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="c1"><div class="when">2020</div><div class="org">Growapp.digital<br />Tunisia</div></div>
+      <div class="c2">
+        <h3>Project Leader</h3>
+        <ul><li>Directed delivery of SaaS marketing-analytics platforms, hands-on across backend and frontend.</li></ul>
+        <div class="chips">
+          <span class="chip"><span class="si si-spring"></span>Spring Boot</span>
+          <span class="chip"><span class="si si-nodedotjs"></span>Node.js</span>
+          <span class="chip"><span class="si si-python"></span>Python</span>
+          <span class="chip"><span class="si si-angular"></span>Angular</span>
+          <span class="chip"><span class="si si-jenkins"></span>Jenkins</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="c1"><div class="when">2019—2020</div><div class="org">Sure-Bid<br />Tunisia</div></div>
+      <div class="c2">
+        <h3>Full Stack Developer</h3>
+        <ul><li>Built a bidding platform connecting subcontractors, from database schema through to deployment.</li></ul>
+        <div class="chips">
+          <span class="chip"><span class="si si-nodedotjs"></span>Node.js</span>
+          <span class="chip"><span class="si si-angular"></span>Angular</span>
+          <span class="chip"><span class="si si-mongodb"></span>MongoDB</span>
+          <span class="chip"><span class="si si-amazonwebservices"></span>AWS</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="c1"><div class="when">2018—2019</div><div class="org">OTDAV<br />Tunis, Tunisia</div></div>
+      <div class="c2">
+        <h3>JEE Developer</h3>
+        <ul><li>Developed copyright-management tooling for a national public institution.</li></ul>
+        <div class="chips">
+          <span class="chip"><span class="si si-openjdk"></span>JEE</span>
+          <span class="chip"><span class="si si-mysql"></span>MySQL</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="c1"><div class="when">2017—2018</div><div class="org">Efrica Ecommerce<br />Tunisia</div></div>
+      <div class="c2">
+        <h3>Web Developer</h3>
+        <ul><li>Built and shipped an ecommerce platform for African artisans.</li></ul>
+        <div class="chips">
+          <span class="chip"><span class="si si-php"></span>PHP</span>
+          <span class="chip"><span class="si si-symfony"></span>Symfony</span>
+          <span class="chip"><span class="si si-mysql"></span>MySQL</span>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="sec" id="stack">
+    <div class="sec-h"><span class="n micro red">Section 02</span><h2>Stack</h2></div>
+    <div class="rowset">
+      <div class="r"><div class="k micro">Data</div><div class="v"><div class="chips">
+        <span class="chip"><span class="si si-clickhouse"></span>ClickHouse</span>
+        <span class="chip"><span class="si si-natsdotio"></span>NATS JetStream</span>
+        <span class="chip"><span class="si si-apachekafka"></span>Kafka</span>
+        <span class="chip"><span class="si si-redis"></span>Redis</span>
+        <span class="chip"><span class="si si-mongodb"></span>MongoDB</span>
+        <span class="chip"><span class="si si-postgresql"></span>PostgreSQL</span>
+      </div></div></div>
+      <div class="r"><div class="k micro">Backend</div><div class="v"><div class="chips">
+        <span class="chip"><span class="si si-nestjs"></span>NestJS</span>
+        <span class="chip"><span class="si si-nodedotjs"></span>Node.js</span>
+        <span class="chip"><span class="si si-typescript"></span>TypeScript</span>
+        <span class="chip"><span class="si si-python"></span>Python</span>
+        <span class="chip"><span class="si si-openjdk"></span>Java / JEE</span>
+      </div></div></div>
+      <div class="r"><div class="k micro">Frontend</div><div class="v"><div class="chips">
+        <span class="chip"><span class="si si-angular"></span>Angular</span>
+        <span class="chip"><span class="si si-typescript"></span>TypeScript</span>
+        <span class="chip"><span class="si si-tradingview"></span>TradingView</span>
+        <span class="chip"><span class="si si-tailwindcss"></span>TailwindCSS</span>
+      </div></div></div>
+      <div class="r"><div class="k micro">Infra</div><div class="v"><div class="chips">
+        <span class="chip"><span class="si si-kubernetes"></span>Kubernetes (k3s)</span>
+        <span class="chip"><span class="si si-docker"></span>Docker</span>
+        <span class="chip"><span class="si si-hashicorp"></span>Nomad</span>
+        <span class="chip"><span class="si si-amazonwebservices"></span>AWS</span>
+        <span class="chip"><span class="si si-cloudflare"></span>Cloudflare</span>
+        <span class="chip"><span class="si si-githubactions"></span>GitHub Actions</span>
+      </div></div></div>
+      <div class="r"><div class="k micro">Observability</div><div class="v"><div class="chips">
+        <span class="chip"><span class="si si-grafana"></span>Grafana</span>
+        <span class="chip"><span class="si si-prometheus"></span>Prometheus</span>
+        <span class="chip"><span class="si si-elasticsearch"></span>Elasticsearch</span>
+      </div></div></div>
+      <div class="r"><div class="k micro">Payments &amp; AI</div><div class="v"><div class="chips">
+        <span class="chip"><span class="si si-stripe"></span>Stripe</span>
+        <span class="chip">x402</span>
+        <span class="chip">MCP</span>
+        <span class="chip"><span class="si si-n8n"></span>n8n</span>
+      </div></div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="education">
+    <div class="sec-h"><span class="n micro red">Section 03</span><h2>Education</h2></div>
+    <div class="rowset">
+      <div class="r"><div class="k micro">2017—2021</div><div class="v">Master's in Computer Science — Esprit School of Engineering, Tunis</div></div>
+      <div class="r"><div class="k micro">2014—2017</div><div class="v">Bachelor's in Computer Science — Faculty of Sciences of Tunis</div></div>
+      <div class="r"><div class="k micro">2012</div><div class="v">Baccalaureate in Computer Science — High School of Beni Khalled, grade Good</div></div>
+      <div class="r"><div class="k micro">Languages</div><div class="v">Arabic (native), French (professional), English (professional)</div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="f1">Rassil Ben Rhouma — Tunis, Tunisia — <span id="yr">2026</span></div>
+    <div class="f2">
+      <a href="mailto:br.rassil@gmail.com"><svg class="i"><use href="#i-mail"/></svg>Email</a>
+      <a href="https://www.linkedin.com/in/rassilbr/" target="_blank" rel="noopener"><svg class="i"><use href="#i-linkedin"/></svg>LinkedIn</a>
+      <a href="https://github.com/Rassilo/" target="_blank" rel="noopener"><svg class="i"><use href="#i-github"/></svg>GitHub</a>
+      <a href="./">Other designs<svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+  </footer>
+</div>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>

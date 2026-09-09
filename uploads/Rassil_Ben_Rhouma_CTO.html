@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rassil Ben Rhouma — CTO</title>
+<style>
+  @page { size: A4; margin: 13mm 14mm 12mm 14mm; }
+
+  :root {
+    --ink:      #16181d;
+    --body:     #33383f;
+    --muted:    #6b727c;
+    --accent:   #0b5c63;
+    --accent-2: #0e7c85;
+    --rule:     #d9dde1;
+    --tint:     #f2f6f6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    font-family: "Segoe UI", "Calibri", system-ui, sans-serif;
+    font-size: 9.4pt;
+    line-height: 1.42;
+    color: var(--body);
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  /* ---------- header ---------- */
+
+  header { padding-bottom: 7pt; border-bottom: 2.2pt solid var(--accent); }
+
+  h1 {
+    font-size: 23pt;
+    font-weight: 600;
+    letter-spacing: 1.6pt;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1.05;
+  }
+
+  .role {
+    margin-top: 3pt;
+    font-size: 10.4pt;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.35pt;
+  }
+
+  .contact {
+    margin-top: 6pt;
+    font-size: 8.7pt;
+    color: var(--muted);
+    letter-spacing: 0.1pt;
+  }
+  .contact b { color: var(--body); font-weight: 600; }
+  .contact .sep { color: var(--rule); padding: 0 4pt; }
+
+  /* ---------- sections ---------- */
+
+  section { margin-top: 11pt; }
+
+  h2 {
+    font-size: 8.6pt;
+    font-weight: 700;
+    letter-spacing: 1.5pt;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 3pt;
+    margin-bottom: 7pt;
+    border-bottom: 0.6pt solid var(--rule);
+  }
+
+  .summary { text-align: justify; color: var(--body); }
+  .summary strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- highlight tiles ---------- */
+
+  .tiles { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6.5pt; }
+
+  .tile {
+    grid-column: span 2;
+    background: var(--tint);
+    border-left: 2.2pt solid var(--accent-2);
+    padding: 5.5pt 8pt 6.5pt;
+  }
+  .tile.wide { grid-column: span 3; }
+
+  .tile .name {
+    font-size: 10.6pt;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1pt;
+    line-height: 1.14;
+  }
+  .tile .fact {
+    margin-top: 1pt;
+    font-size: 8pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.65pt;
+    color: var(--ink);
+  }
+  .tile .fact .exact { text-transform: none; letter-spacing: 0.2pt; }
+  .tile p { margin-top: 3pt; font-size: 8.4pt; line-height: 1.34; color: var(--muted); }
+
+  /* ---------- experience ---------- */
+
+  .job { margin-bottom: 11pt; break-inside: avoid; }
+  .job:last-child { margin-bottom: 0; }
+  .job.page-2 { break-before: page; padding-top: 2pt; }
+
+  .job-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10pt;
+  }
+  .job-title { font-size: 10pt; font-weight: 700; color: var(--ink); letter-spacing: 0.1pt; }
+  .job-title .at { font-weight: 600; color: var(--accent); }
+  .job-meta {
+    font-size: 8.4pt;
+    color: var(--muted);
+    white-space: nowrap;
+    letter-spacing: 0.2pt;
+  }
+
+  ul { list-style: none; margin-top: 4pt; }
+  li {
+    position: relative;
+    padding-left: 10pt;
+    margin-bottom: 2.6pt;
+  }
+  li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 4.6pt;
+    width: 3pt;
+    height: 3pt;
+    background: var(--accent-2);
+  }
+  li strong { color: var(--ink); font-weight: 600; }
+
+  .stack { color: var(--muted); }
+
+  /* ---------- skills ---------- */
+
+  .skills { display: grid; grid-template-columns: 82pt 1fr; row-gap: 3.4pt; column-gap: 10pt; }
+  .skills dt {
+    font-size: 8.3pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6pt;
+    color: var(--ink);
+    padding-top: 0.6pt;
+  }
+  .skills dd { color: var(--body); }
+  .skills dd .dot { color: var(--rule); padding: 0 1.5pt; }
+
+  /* ---------- footer row ---------- */
+
+  .split { display: flex; gap: 20pt; }
+  .split > div { flex: 1; }
+  .split > div.narrow { flex: 0 0 30%; }
+
+  .edu { margin-bottom: 6pt; }
+  .edu:last-child { margin-bottom: 0; }
+  .edu .degree { font-weight: 600; color: var(--ink); }
+  .edu .where { font-size: 8.6pt; color: var(--muted); }
+
+  .lang { margin-bottom: 3.4pt; display: flex; justify-content: space-between; }
+  .lang .name { font-weight: 600; color: var(--ink); }
+  .lang .level { color: var(--muted); font-size: 8.6pt; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Rassil Ben Rhouma</h1>
+  <div class="role">CTO &amp; Co-Founder — Laevitas</div>
+  <div class="contact">
+    Tunis, Tunisia
+    <span class="sep">|</span> +216 52 497 659
+    <span class="sep">|</span> <b>br.rassil@gmail.com</b>
+    <span class="sep">|</span> <b>rassilbr.me</b>
+  </div>
+</header>
+
+<section>
+  <h2>Profile</h2>
+  <p class="summary">
+    CTO and co-founder of <strong>Laevitas</strong>, a crypto derivatives analytics platform used by
+    trading desks and quant teams. I architect and run the full stack: event-driven ingestion on
+    <strong>NATS JetStream</strong> and Redis Streams, a <strong>ClickHouse</strong> warehouse on bare
+    metal holding 7B+ rows of tick data, and a public market-data API running at
+    <strong>99.99% availability</strong> on self-managed <strong>Kubernetes</strong>. I moved the platform
+    off managed cloud databases onto bare metal — <strong>92% cheaper</strong> and turning multi-second
+    queries into sub-second ones. I also own the commercial layer — Stripe
+    subscriptions, usage quotas and on-chain pay-per-request billing — and shipped AI-native access
+    through an MCP server and LLM-driven alerting. Nine years building real-time data infrastructure,
+    still hands-on in the codebase.
+  </p>
+</section>
+
+<section>
+  <h2>Highlights</h2>
+  <div class="tiles">
+    <div class="tile">
+      <div class="name">API Availability</div>
+      <div class="fact">99.99% uptime</div>
+      <p>Four nines on the public market-data API — layered caching, rate limiting, graceful degradation and SLO alerting.</p>
+    </div>
+    <div class="tile">
+      <div class="name">Event-Driven Core</div>
+      <div class="fact">NATS JetStream</div>
+      <p>Analytics moved off cron/batch onto producer–consumer streaming with replay — sub-second data latency.</p>
+    </div>
+    <div class="tile">
+      <div class="name">Cost Optimization</div>
+      <div class="fact">92% lower DB spend</div>
+      <p>Managed cloud databases benchmarked against ClickHouse on bare metal, then migrated — cheaper and faster.</p>
+    </div>
+    <div class="tile wide">
+      <div class="name">Kubernetes Platform</div>
+      <div class="fact">Self-managed <span class="exact">k3s</span> on bare metal</div>
+      <p>Production and analytics clusters — 7B+ rows on HA ClickHouse, zero-downtime rollouts, autoscaling, infrastructure-as-code.</p>
+    </div>
+    <div class="tile wide">
+      <div class="name">Payments in Production</div>
+      <div class="fact">Stripe + <span class="exact">x402</span></div>
+      <p>Subscriptions, entitlements and invoicing tied to API tiers, plus on-chain pay-per-request billing.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Experience</h2>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-title">CTO &amp; Co-Founder <span class="at">— Laevitas</span></div>
+      <div class="job-meta">08/2020 – Present &nbsp;·&nbsp; Tunis, Tunisia</div>
+    </div>
+    <ul>
+      <li>Own technology <strong>end to end</strong> — architecture, infrastructure, security and the engineering team — from co-founding Laevitas to a production analytics platform serving institutional users</li>
+      <li>Re-architected core analytics from cron/batch jobs to an <strong>event-driven pipeline on NATS JetStream and Redis Streams</strong> (producer–consumer, replay, at-least-once delivery), bringing data latency down to sub-second</li>
+      <li>Moved the data layer <strong>from OLTP to OLAP</strong>: after running MongoDB Atlas, AWS Aurora and other managed databases against 1.5&nbsp;TB of lagging market data, benchmarked and consolidated onto <strong>ClickHouse on bare metal</strong> — sub-second queries and monthly database spend cut 92% — <strong>over $8,000 a month saved</strong></li>
+      <li><strong>Architected and operate self-managed Kubernetes (k3s) on bare metal</strong> across production and analytics clusters — HA ClickHouse, zero-downtime rollouts, autoscaling, infrastructure-as-code provisioning</li>
+      <li>Raised public API availability to <strong>99.99%</strong> through multi-layer caching, sliding-window rate limiting, graceful degradation and Prometheus/Grafana SLO alerting on every hop</li>
+      <li>Shipped <strong>AI-native access</strong> to the platform: an MCP server exposing 30+ market-data tools with OAuth 2.1 so AI agents query Laevitas directly, plus <strong>Sentinel</strong> — LLM-driven anomaly detection and alerting over live derivatives flow</li>
+      <li>Own <strong>billing and payments end to end</strong>: designed the subscription and payment system on <strong>Stripe</strong> (plans, entitlements, upgrades, webhooks, invoicing) tied to API-key tiers and usage quotas, then added <strong>x402</strong> on-chain pay-per-request billing — stablecoin micropayments per API call with prepaid credit bundles settled in ~1&nbsp;ms</li>
+      <li>Scaled ClickHouse past <strong>7 billion rows</strong> of options and futures tick data with sub-second queries, powering client dashboards and proprietary vol-surface / GEX analytics</li>
+      <li>Built observability from zero across ingestion, storage and API (Grafana, Prometheus, Elasticsearch) and automated internal runbooks with <strong>n8n</strong>, including a custom Redis Streams trigger node</li>
+    </ul>
+  </div>
+
+  <div class="job page-2">
+    <div class="job-head">
+      <div class="job-title">Software Engineer &amp; Lead <span class="at">— Growapp</span></div>
+      <div class="job-meta">05/2020 – 03/2021 &nbsp;·&nbsp; Tunisia</div>
+    </div>
+    <ul>
+      <li>Led delivery of SaaS marketing-analytics platforms, hands-on across backend and frontend <span class="stack">(Spring Boot, Node.js, Python, Angular, Docker, Jenkins)</span></li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-title">Full Stack Developer <span class="at">— Sure-Bid</span></div>
+      <div class="job-meta">02/2019 – 04/2020 &nbsp;·&nbsp; Tunisia</div>
+    </div>
+    <ul>
+      <li>Built a bidding platform connecting subcontractors, schema to deployment <span class="stack">(Node.js, Angular, MongoDB, AWS)</span></li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-title">JEE Developer <span class="at">— OTDAV, Tunisian Organization of Copyrights</span></div>
+      <div class="job-meta">11/2018 – 03/2019 &nbsp;·&nbsp; Tunis, Tunisia</div>
+    </div>
+    <ul>
+      <li>Developed copyright-management tooling for a national public institution <span class="stack">(JEE, WildFly, MySQL)</span></li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-title">Web Developer <span class="at">— Efrica Ecommerce</span></div>
+      <div class="job-meta">07/2017 – 11/2018 &nbsp;·&nbsp; Tunisia</div>
+    </div>
+    <ul>
+      <li>Built and shipped an ecommerce platform for African artisans <span class="stack">(PHP, Symfony, MySQL)</span></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Technical Skills</h2>
+  <dl class="skills">
+    <dt>Data &amp; Streaming</dt>
+    <dd>ClickHouse <span class="dot">·</span> NATS JetStream <span class="dot">·</span> Kafka <span class="dot">·</span> Redis (Streams, Pub/Sub) <span class="dot">·</span> MongoDB <span class="dot">·</span> PostgreSQL <span class="dot">·</span> Aurora</dd>
+
+    <dt>Backend</dt>
+    <dd>NestJS <span class="dot">·</span> Node.js <span class="dot">·</span> TypeScript <span class="dot">·</span> Python <span class="dot">·</span> Java / JEE <span class="dot">·</span> REST <span class="dot">·</span> GraphQL <span class="dot">·</span> WebSockets</dd>
+
+    <dt>Frontend</dt>
+    <dd>Angular <span class="dot">·</span> TypeScript <span class="dot">·</span> TradingView <span class="dot">·</span> ECharts</dd>
+
+    <dt>Infrastructure</dt>
+    <dd>Kubernetes (k3s, bare metal) <span class="dot">·</span> Docker <span class="dot">·</span> Nomad <span class="dot">·</span> AWS (Lambda, S3) <span class="dot">·</span> Hetzner <span class="dot">·</span> Cloudflare <span class="dot">·</span> GitHub Actions</dd>
+
+    <dt>Observability</dt>
+    <dd>Grafana <span class="dot">·</span> Prometheus <span class="dot">·</span> Elasticsearch <span class="dot">·</span> SLO design &amp; alerting</dd>
+
+    <dt>Payments</dt>
+    <dd>Stripe (subscriptions, webhooks, invoicing) <span class="dot">·</span> x402 on-chain micropayments <span class="dot">·</span> usage metering &amp; quotas</dd>
+
+    <dt>AI &amp; Automation</dt>
+    <dd>MCP (Model Context Protocol) <span class="dot">·</span> LLM-driven features <span class="dot">·</span> n8n</dd>
+  </dl>
+</section>
+
+<section>
+  <div class="split">
+    <div>
+      <h2>Education</h2>
+      <div class="edu">
+        <div class="degree">Engineering Degree / Master's in Computer Science</div>
+        <div class="where">Esprit School of Engineering · Tunis, Tunisia · 2017 – 2021</div>
+      </div>
+      <div class="edu">
+        <div class="degree">Bachelor's in Computer Science</div>
+        <div class="where">Faculty of Sciences of Tunis · Tunis, Tunisia · 2014 – 2017</div>
+      </div>
+    </div>
+    <div class="narrow">
+      <h2>Languages</h2>
+      <div class="lang"><span class="name">Arabic</span><span class="level">Native</span></div>
+      <div class="lang"><span class="name">French</span><span class="level">Professional</span></div>
+      <div class="lang"><span class="name">English</span><span class="level">Professional</span></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

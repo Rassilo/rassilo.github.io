@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rassil Ben Rhouma — CTO &amp; Co-Founder, Laevitas</title>
+<meta name="description" content="CTO and co-founder of Laevitas. Event-driven crypto derivatives analytics, ClickHouse at 7B+ rows, self-managed Kubernetes." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#070a0d; --panel:#0d1218; --line:#1b242e; --line-2:#2a3644;
+    --fg:#c9d6e2; --dim:#6b7f92; --faint:#42556a;
+    --acc:#4ade80; --acc-2:#38bdf8; --warn:#fbbf24; --pink:#f472b6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:14px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(900px 500px at 15% -10%, rgba(74,222,128,.07), transparent 65%),
+      radial-gradient(700px 500px at 90% 5%, rgba(56,189,248,.06), transparent 65%);
+  }
+  body::after{
+    content:""; position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.35;
+    background:repeating-linear-gradient(to bottom,rgba(255,255,255,.018) 0 1px,transparent 1px 3px);
+  }
+  .wrap{position:relative; z-index:2; max-width:1080px; margin:0 auto; padding:0 24px 96px}
+
+  /* window chrome */
+  .chrome{
+    position:sticky; top:0; z-index:20;
+    background:rgba(7,10,13,.88); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .chrome-in{max-width:1080px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .dots{display:flex;gap:7px}
+  .dots i{width:11px;height:11px;border-radius:50%;display:block}
+  .dots i:nth-child(1){background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+  .chrome-title{color:var(--dim);font-size:12px}
+  .chrome-nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+  .chrome-nav a{color:var(--dim);text-decoration:none;font-size:12px;padding:4px 9px;border:1px solid transparent;border-radius:4px}
+  .chrome-nav a:hover{color:var(--acc);border-color:var(--line-2);background:var(--panel)}
+
+  /* prompt lines */
+  .cmd{display:flex;gap:10px;align-items:baseline;margin:52px 0 18px;flex-wrap:wrap}
+  .cmd .ps1{color:var(--acc);white-space:nowrap}
+  .cmd .ps1 b{color:var(--acc-2);font-weight:500}
+  .cmd .txt{color:var(--fg)}
+  .cmd .txt em{color:var(--warn);font-style:normal}
+  .caret{display:inline-block;width:8px;height:15px;background:var(--acc);vertical-align:-2px;animation:blink 1.05s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* hero */
+  .hero{padding:56px 0 10px}
+  .hero h1{
+    font-size:clamp(30px,6.2vw,58px);font-weight:700;letter-spacing:-.02em;line-height:1.05;
+    color:#eaf2f8;
+  }
+  .hero h1 .green{color:var(--acc)}
+  .role{margin-top:12px;color:var(--acc-2);font-size:clamp(14px,2.2vw,17px)}
+  .role .sep{color:var(--faint)}
+  .blurb{margin-top:22px;max-width:74ch;color:var(--dim)}
+  .blurb b{color:var(--fg);font-weight:500}
+  .meta{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px}
+  .meta a,.meta span{
+    display:inline-flex;align-items:center;gap:7px;font-size:12.5px;
+    border:1px solid var(--line-2);border-radius:5px;padding:6px 11px;
+    color:var(--dim);text-decoration:none;background:var(--panel);
+  }
+  .meta a:hover{color:var(--acc);border-color:var(--acc)}
+  .meta .k{color:var(--faint)}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .stat{background:var(--panel);padding:20px 18px}
+  .stat .n{font-size:clamp(22px,3.4vw,30px);font-weight:700;color:var(--acc);letter-spacing:-.02em;line-height:1.15}
+  .stat .n small{font-size:.55em;color:var(--faint);font-weight:400}
+  .stat .l{margin-top:8px;color:var(--dim);font-size:12px;line-height:1.5}
+  .stat:nth-child(2) .n{color:var(--acc-2)}
+  .stat:nth-child(3) .n{color:var(--warn)}
+  .stat:nth-child(4) .n{color:var(--pink)}
+
+  /* job log */
+  .job{border-left:1px solid var(--line-2);padding:0 0 30px 22px;position:relative}
+  .job::before{content:"";position:absolute;left:-4.5px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--faint);box-shadow:0 0 0 4px var(--bg)}
+  .job.now::before{background:var(--acc);box-shadow:0 0 0 4px var(--bg),0 0 14px var(--acc)}
+  .job:last-child{border-color:transparent;padding-bottom:0}
+  .job-h{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+  .job-h h3{font-size:16px;font-weight:700;color:#eaf2f8}
+  .job-h .co{color:var(--acc-2)}
+  .job-h .when{margin-left:auto;color:var(--faint);font-size:12px;white-space:nowrap}
+  .job.now .when{color:var(--acc)}
+  .job ul{list-style:none;margin-top:12px;display:grid;gap:8px}
+  .job li{color:var(--dim);padding-left:20px;position:relative;max-width:82ch}
+  .job li::before{content:"\203A";position:absolute;left:2px;color:var(--faint)}
+  .job li b{color:var(--fg);font-weight:500}
+  .job li mark{background:none;color:var(--acc);font-weight:500}
+  .tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+  .tags span{font-size:11px;color:var(--faint);border:1px solid var(--line);border-radius:3px;padding:2px 7px}
+
+  /* skills */
+  .skills{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .srow{background:var(--panel);display:grid;grid-template-columns:170px 1fr;gap:16px;padding:14px 18px}
+  .srow .k{color:var(--acc);font-size:12.5px}
+  .srow .v{display:flex;flex-wrap:wrap;gap:6px}
+  .srow .v span{font-size:12px;color:var(--dim);border:1px solid var(--line-2);border-radius:3px;padding:2px 8px}
+  .srow .v span:hover{color:var(--fg);border-color:var(--faint)}
+  @media(max-width:640px){.srow{grid-template-columns:1fr;gap:8px}}
+
+  /* two col */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  @media(max-width:760px){.cols{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px}
+  .card h4{font-size:13px;color:var(--fg);font-weight:700}
+  .card .sub{color:var(--acc-2);font-size:12.5px;margin-top:3px}
+  .card .yr{color:var(--faint);font-size:12px;margin-top:3px}
+  .card + .card{margin-top:12px}
+
+  footer{margin-top:64px;border-top:1px solid var(--line);padding-top:22px;color:var(--faint);font-size:12px;display:flex;flex-wrap:wrap;gap:12px}
+  footer a{color:var(--dim);text-decoration:none}
+  footer a:hover{color:var(--acc)}
+  .exit{margin-left:auto}
+
+  .js .reveal{opacity:0;transform:translateY(14px)}
+  .js .reveal.in{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}
+  @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}.caret{animation:none}}
+</style>
+</head>
+<body>
+<script>document.documentElement.className+=" js";</script>
+
+<div class="chrome">
+  <div class="chrome-in">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <span class="chrome-title">rassil@laevitas: ~/cv</span>
+    <nav class="chrome-nav">
+      <a href="#about">about</a><a href="#impact">impact</a><a href="#work">work</a>
+      <a href="#stack">stack</a><a href="#edu">education</a><a href="#contact">contact</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="hero" id="about">
+    <div class="cmd"><span class="ps1">rassil@laevitas <b>~</b> $</span><span class="txt">whoami</span></div>
+    <h1><span class="green">Rassil</span> Ben Rhouma</h1>
+    <div class="role">CTO &amp; Co-Founder <span class="sep">@</span> Laevitas <span class="sep">·</span> Software Architect <span class="sep">·</span> Tunis, TN</div>
+    <p class="blurb">
+      I build and run the platform behind <b>Laevitas</b> — crypto derivatives analytics used by trading desks and quant teams.
+      Event-driven ingestion on <b>Redis Streams</b> and <b>NATS JetStream</b>, a <b>ClickHouse</b> warehouse holding
+      <b>7B+ rows</b> of tick data on bare metal, and a public market-data API on self-managed <b>Kubernetes</b>.
+      Nine years on real-time data infrastructure. Still hands-on in the codebase.
+    </p>
+    <div class="meta">
+      <a href="mailto:br.rassil@gmail.com"><span class="k">mail</span> br.rassil@gmail.com</a>
+      <a href="tel:+21652497659"><span class="k">tel</span> +216 52 497 659</a>
+      <a href="https://www.linkedin.com/in/rassilbr/" target="_blank" rel="noopener"><span class="k">in</span> /rassilbr</a>
+      <a href="https://github.com/Rassilo/" target="_blank" rel="noopener"><span class="k">gh</span> /Rassilo</a>
+      <a href="../uploads/Rassil_Ben_Rhouma_CTO.pdf"><span class="k">pdf</span> resume</a>
+      <span><span class="k">loc</span> Tunis, Tunisia</span>
+    </div>
+  </section>
+
+  <section id="impact">
+    <div class="cmd reveal"><span class="ps1">rassil@laevitas <b>~</b> $</span><span class="txt">cat impact.log <em>--top 4</em></span></div>
+    <div class="stats reveal">
+      <div class="stat"><div class="n">$8k+ <small>/mo saved</small></div><div class="l">Cut 92% off monthly database spend by moving off managed cloud DBs onto ClickHouse on bare metal.</div></div>
+      <div class="stat"><div class="n">99.99<small>%</small></div><div class="l">Public market-data API availability — caching, rate limiting, graceful degradation, SLO alerting.</div></div>
+      <div class="stat"><div class="n">7B<small>+ rows</small></div><div class="l">Options and futures tick data in production ClickHouse, queried sub-second.</div></div>
+      <div class="stat"><div class="n">&lt;1<small>s latency</small></div><div class="l">Cron/batch analytics re-architected into a replayable producer–consumer pipeline.</div></div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="cmd reveal"><span class="ps1">rassil@laevitas <b>~</b> $</span><span class="txt">git log --author="rassil" <em>--since=2017</em></span></div>
+
+    <article class="job now reveal">
+      <div class="job-h"><h3>CTO &amp; Co-Founder</h3><span class="co">Laevitas.ch</span><span class="when">08/2020 — present</span></div>
+      <ul>
+        <li>Own technology end to end — architecture, infrastructure, security and the engineering team — from co-founding to a production platform serving trading desks.</li>
+        <li>Re-architected core analytics from cron/batch jobs to an <b>event-driven pipeline</b> on NATS JetStream and Redis Streams: producer–consumer, replay, at-least-once delivery, <mark>sub-second data latency</mark>.</li>
+        <li>Benchmarked MongoDB Atlas, AWS Aurora and other managed databases against 1.5 TB of lagging market data, then consolidated onto <b>ClickHouse on bare metal</b> — <mark>over $8,000/month saved</mark> with faster queries.</li>
+        <li>Architected and operate <b>self-managed Kubernetes (k3s)</b> on bare metal across production and analytics clusters: HA ClickHouse, zero-downtime rollouts, autoscaling, infrastructure as code.</li>
+        <li>Took the public API to <mark>99.99% availability</mark> with multi-layer caching, sliding-window rate limiting, graceful degradation and Prometheus/Grafana SLO alerting on every hop.</li>
+        <li>Shipped AI-native access: an <b>MCP server</b> exposing 30+ market-data tools over OAuth 2.1, plus LLM-driven anomaly detection on live derivatives flow.</li>
+        <li>Own billing end to end — <b>Stripe</b> subscriptions, entitlements, webhooks and invoicing tied to API-key tiers and usage quotas, plus <b>x402</b> on-chain pay-per-request micropayments.</li>
+        <li>Built observability from zero across ingestion, storage and API (Grafana, Prometheus, Elasticsearch) and automated runbooks with n8n, including a custom Redis Streams trigger node.</li>
+      </ul>
+      <div class="tags"><span>ClickHouse</span><span>NATS JetStream</span><span>Redis Streams</span><span>k3s</span><span>NestJS</span><span>Angular</span><span>Grafana</span><span>Stripe</span><span>MCP</span></div>
+    </article>
+
+    <article class="job reveal">
+      <div class="job-h"><h3>Project Leader</h3><span class="co">Growapp.digital</span><span class="when">05/2020 — 07/2020</span></div>
+      <ul><li>Directed delivery of SaaS marketing-analytics platforms, hands-on across backend and frontend.</li></ul>
+      <div class="tags"><span>Spring Boot</span><span>Node.js</span><span>Python</span><span>Angular</span><span>Docker</span><span>Jenkins</span></div>
+    </article>
+
+    <article class="job reveal">
+      <div class="job-h"><h3>Full Stack Developer</h3><span class="co">Sure-Bid.com</span><span class="when">04/2019 — 04/2020</span></div>
+      <ul><li>Built a bidding platform connecting subcontractors, from schema to deployment.</li></ul>
+      <div class="tags"><span>Node.js</span><span>Angular</span><span>MongoDB</span><span>AWS</span></div>
+    </article>
+
+    <article class="job reveal">
+      <div class="job-h"><h3>JEE Developer</h3><span class="co">OTDAV</span><span class="when">11/2018 — 03/2019</span></div>
+      <ul><li>Developed copyright-management tooling for a national public institution.</li></ul>
+      <div class="tags"><span>JEE</span><span>WildFly</span><span>MySQL</span></div>
+    </article>
+
+    <article class="job reveal">
+      <div class="job-h"><h3>Web Developer</h3><span class="co">Efrica Ecommerce</span><span class="when">07/2017 — 11/2018</span></div>
+      <ul><li>Built and shipped an ecommerce platform for African artisans.</li></ul>
+      <div class="tags"><span>PHP</span><span>Symfony</span><span>MySQL</span></div>
+    </article>
+  </section>
+
+  <section id="stack">
+    <div class="cmd reveal"><span class="ps1">rassil@laevitas <b>~</b> $</span><span class="txt">stack --list <em>--group</em></span></div>
+    <div class="skills reveal">
+      <div class="srow"><div class="k">data &amp; storage</div><div class="v"><span>ClickHouse</span><span>NATS JetStream</span><span>Kafka</span><span>Redis Streams</span><span>Redis Pub/Sub</span><span>MongoDB</span><span>PostgreSQL</span><span>Aurora</span></div></div>
+      <div class="srow"><div class="k">backend</div><div class="v"><span>NestJS</span><span>Node.js</span><span>TypeScript</span><span>Python</span><span>Java / JEE</span><span>REST</span><span>GraphQL</span><span>WebSockets</span></div></div>
+      <div class="srow"><div class="k">frontend</div><div class="v"><span>Angular</span><span>TypeScript</span><span>TradingView</span><span>ECharts</span><span>TailwindCSS</span></div></div>
+      <div class="srow"><div class="k">infrastructure</div><div class="v"><span>Kubernetes (k3s)</span><span>Docker</span><span>Nomad</span><span>AWS Lambda</span><span>S3</span><span>Hetzner</span><span>Cloudflare</span><span>GitHub Actions</span></div></div>
+      <div class="srow"><div class="k">observability</div><div class="v"><span>Grafana</span><span>Prometheus</span><span>Elasticsearch</span><span>SLO &amp; alerting</span></div></div>
+      <div class="srow"><div class="k">payments</div><div class="v"><span>Stripe</span><span>x402 micropayments</span><span>usage metering</span><span>quotas</span></div></div>
+      <div class="srow"><div class="k">ai &amp; automation</div><div class="v"><span>MCP</span><span>LLM features</span><span>n8n</span></div></div>
+    </div>
+  </section>
+
+  <section id="edu">
+    <div class="cmd reveal"><span class="ps1">rassil@laevitas <b>~</b> $</span><span class="txt">cat education.md languages.md</span></div>
+    <div class="cols reveal">
+      <div>
+        <div class="card"><h4>Master's in Computer Science</h4><div class="sub">Esprit School of Engineering</div><div class="yr">2017 — 2021 · Tunis, Tunisia</div></div>
+        <div class="card"><h4>Bachelor's in Computer Science</h4><div class="sub">Faculty of Sciences of Tunis</div><div class="yr">2014 — 2017 · Tunis, Tunisia</div></div>
+        <div class="card"><h4>Baccalaureate — Computer Science</h4><div class="sub">High School of Beni Khalled</div><div class="yr">2012 · Grade: Good</div></div>
+      </div>
+      <div>
+        <div class="card"><h4>Languages</h4><div class="sub">Arabic — native</div><div class="sub">French — professional</div><div class="sub">English — professional</div></div>
+        <div class="card"><h4>Also worth knowing</h4><div class="yr" style="color:var(--dim);margin-top:8px">Led an on-premise migration with no customer-facing downtime, running both stacks in parallel until cutover. Comfortable owning R&amp;D, hiring, and the commercial layer alongside the architecture.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="cmd reveal"><span class="ps1">rassil@laevitas <b>~</b> $</span><span class="txt">mail -s "let's talk" br.rassil@gmail.com<span class="caret"></span></span></div>
+  </section>
+
+  <footer>
+    <span>&copy; <span id="yr">2026</span> Rassil Ben Rhouma</span>
+    <a href="mailto:br.rassil@gmail.com">br.rassil@gmail.com</a>
+    <a href="https://www.linkedin.com/in/rassilbr/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/Rassilo/" target="_blank" rel="noopener">GitHub</a>
+    <a class="exit" href="./">&#8617; other designs</a>
+  </footer>
+</div>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>
